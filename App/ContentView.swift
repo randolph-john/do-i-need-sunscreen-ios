@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreLocation
+import WidgetKit
 
 // MARK: - UV Background Colors (from utils.js)
 
@@ -135,6 +136,7 @@ struct ContentView: View {
             if altitudeMeters >= 0 {
                 preferences.elevationFeet = altitudeMeters * 3.28084
             }
+            saveLocationForWidget(location)
             Task {
                 await weatherService.fetchWeather(for: location)
             }
@@ -150,6 +152,7 @@ struct ContentView: View {
                 if let elevation = elevation {
                     preferences.elevationFeet = elevation * 3.28084
                 }
+                saveLocationForWidget(location)
                 Task {
                     await weatherService.fetchWeather(for: location)
                 }
@@ -662,6 +665,13 @@ struct ContentView: View {
         activityVC.popoverPresentationController?.sourceView = rootVC.view
         activityVC.popoverPresentationController?.sourceRect = CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 0, height: 0)
         rootVC.present(activityVC, animated: true)
+    }
+
+    private func saveLocationForWidget(_ location: CLLocation) {
+        let defaults = UserDefaults(suiteName: "group.com.sunscreenfyi.shared")
+        defaults?.set(location.coordinate.latitude, forKey: "lastLatitude")
+        defaults?.set(location.coordinate.longitude, forKey: "lastLongitude")
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     private func featureRow(title: String, @ViewBuilder action: () -> some View) -> some View {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -57,7 +57,7 @@
 /* Begin PBXFileReference section */
 		0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenAlgorithm.swift; sourceTree = "<group>"; };
 		133D74B9542BD568BC18E17F /* UVGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVGraphView.swift; sourceTree = "<group>"; };
-		196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunscreenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = SunscreenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B3E1F7E82A68D7E4A1930C6 /* SunscreenWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunscreenWidgetExtension.entitlements; sourceTree = "<group>"; };
 		30B895C2D6B058F7F6685C6E /* SunscreenWidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidgetViews.swift; sourceTree = "<group>"; };
 		31AA21514E80074EDF7A0F96 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoINeedSunscreenApp.swift; sourceTree = "<group>"; };
 		DD0C9E95094CB09F3DC93DE0 /* DoctorBackedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorBackedView.swift; sourceTree = "<group>"; };
 		EDEF528C023F14B2C5C85BDC /* SunscreenWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidgetProvider.swift; sourceTree = "<group>"; };
-		F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoINeedSunscreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DoINeedSunscreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -200,6 +200,7 @@
 			);
 			mainGroup = F6485D4C749BC7A4EB9451BA;
 			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -277,7 +278,6 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Widget/SunscreenWidgetExtension.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sunscreen Widget";
@@ -417,7 +417,6 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Widget/SunscreenWidgetExtension.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sunscreen Widget";
@@ -440,7 +439,6 @@
 				CODE_SIGN_ENTITLEMENTS = App/DoINeedSunscreen.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Do I Need Sunscreen?";
@@ -465,7 +463,6 @@
 				CODE_SIGN_ENTITLEMENTS = App/DoINeedSunscreen.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Do I Need Sunscreen?";

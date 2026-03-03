@@ -45,8 +45,23 @@ struct SunscreenWidgetProvider: TimelineProvider {
         }
     }
 
+    private func getLocation() -> CLLocation? {
+        // Try CLLocationManager first
+        if let location = locationManager.location {
+            return location
+        }
+
+        // Fall back to last known location saved by the main app
+        let defaults = UserDefaults(suiteName: "group.com.sunscreenfyi.shared")
+        guard let lat = defaults?.object(forKey: "lastLatitude") as? Double,
+              let lon = defaults?.object(forKey: "lastLongitude") as? Double else {
+            return nil
+        }
+        return CLLocation(latitude: lat, longitude: lon)
+    }
+
     private func fetchEntry(completion: @escaping (SunscreenEntry) -> Void) {
-        guard let location = locationManager.location else {
+        guard let location = getLocation() else {
             completion(.placeholder)
             return
         }
