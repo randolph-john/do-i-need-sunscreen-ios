@@ -267,7 +267,16 @@ struct ContentView: View {
                     .foregroundColor(textColor)
                     .shadow(color: .black.opacity(0.3), radius: 4, x: 2, y: 2)
                     .tracking(4)
-                    .padding(.vertical, 20)
+
+                // Reapplication time
+                if result.needsSunscreen, let safeMin = result.safeExposureMinutes, safeMin > 0 {
+                    Text("Apply within \(SunscreenAlgorithm.formatDuration(minutes: safeMin)) to avoid burn")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(textColor.opacity(0.85))
+                        .padding(.top, 4)
+                }
+
+                Spacer().frame(height: 20)
             }
         }
     }
