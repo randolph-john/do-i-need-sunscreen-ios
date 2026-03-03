@@ -17,3 +17,6 @@ Carthage/
 *.ipa
 *.dSYM.zip
 *.dSYM
+
+# Claude Code
+CLAUDE.md
