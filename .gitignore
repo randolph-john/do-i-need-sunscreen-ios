@@ -1,0 +1,19 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserdata
+xcuserdata/
+
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Dependencies
+Pods/
+Carthage/
+
+# Build artifacts
+*.ipa
+*.dSYM.zip
+*.dSYM

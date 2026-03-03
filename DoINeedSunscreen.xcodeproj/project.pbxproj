@@ -1,0 +1,484 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		19257AD2ACAE5FA2E0A8FF9F /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AA21514E80074EDF7A0F96 /* UserPreferences.swift */; };
+		2B712E1A1E39201C0583567F /* DoINeedSunscreenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */; };
+		30A14AB79942B735CDE63188 /* SunscreenAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */; };
+		41702BDE7F7AED552058C3F8 /* SunscreenWidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B895C2D6B058F7F6685C6E /* SunscreenWidgetViews.swift */; };
+		4D71419EF83B632C926DB20F /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2BC4D3677A5D1F3975E1F8 /* WeatherService.swift */; };
+		5C7A0124341539CF22FDA2AC /* SunscreenWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5DE4FC50A98A1BD914BA7679 /* SkinTypeQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BF979E177DA7566EB157C2 /* SkinTypeQuizView.swift */; };
+		630D20B10900A16A5F732FA7 /* SunscreenAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */; };
+		7291A1C3269BCF03B85EEF52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC872A78D7644736A0EEAAB4 /* Assets.xcassets */; };
+		A1904549F9CFA35B347C054C /* SunscreenWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC51B1C30242C63CD56DE82 /* SunscreenWidget.swift */; };
+		A2338A6547C626172F747EBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */; };
+		A9978BD38A2F14107835E8A9 /* SunscreenWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF528C023F14B2C5C85BDC /* SunscreenWidgetProvider.swift */; };
+		C4B5B44AB3F6FD3FC2C65F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58DDD5CEC082117CC85085E9 /* Assets.xcassets */; };
+		DCCA5F2B98B6E3874939F76F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4AF0EF9C12C09BFF37791 /* LocationManager.swift */; };
+		EE7DF6B81086BF0C5173BC4E /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AA21514E80074EDF7A0F96 /* UserPreferences.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		36A25205BD0D852659BA9DA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE2C7F2A080C799A977B852A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4BD73F9D2B2C89B3B25CF73F;
+			remoteInfo = SunscreenWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3FCE0CC437A2C6E6F6D9F1E9 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5C7A0124341539CF22FDA2AC /* SunscreenWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenAlgorithm.swift; sourceTree = "<group>"; };
+		196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = SunscreenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B3E1F7E82A68D7E4A1930C6 /* SunscreenWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunscreenWidgetExtension.entitlements; sourceTree = "<group>"; };
+		30B895C2D6B058F7F6685C6E /* SunscreenWidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidgetViews.swift; sourceTree = "<group>"; };
+		31AA21514E80074EDF7A0F96 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		58DDD5CEC082117CC85085E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6AC51B1C30242C63CD56DE82 /* SunscreenWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidget.swift; sourceTree = "<group>"; };
+		6B2BC4D3677A5D1F3975E1F8 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		99BF979E177DA7566EB157C2 /* SkinTypeQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinTypeQuizView.swift; sourceTree = "<group>"; };
+		9A0DF0742B850C432DFC8D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A4D4AF0EF9C12C09BFF37791 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		AD47B5A781F0159DC2E1B16B /* DoINeedSunscreen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DoINeedSunscreen.entitlements; sourceTree = "<group>"; };
+		CC872A78D7644736A0EEAAB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoINeedSunscreenApp.swift; sourceTree = "<group>"; };
+		EDEF528C023F14B2C5C85BDC /* SunscreenWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidgetProvider.swift; sourceTree = "<group>"; };
+		F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DoINeedSunscreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0FB12BB51067D56D9F0141BF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */,
+				196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		33BCC5FB69A5935EEB6D6FD6 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */,
+				31AA21514E80074EDF7A0F96 /* UserPreferences.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		5C25E6A4A2D1A508C6624585 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CC872A78D7644736A0EEAAB4 /* Assets.xcassets */,
+				37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */,
+				AD47B5A781F0159DC2E1B16B /* DoINeedSunscreen.entitlements */,
+				DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */,
+				A4D4AF0EF9C12C09BFF37791 /* LocationManager.swift */,
+				99BF979E177DA7566EB157C2 /* SkinTypeQuizView.swift */,
+				6B2BC4D3677A5D1F3975E1F8 /* WeatherService.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		63CEEC9C7A41753871AAD23F /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				58DDD5CEC082117CC85085E9 /* Assets.xcassets */,
+				9A0DF0742B850C432DFC8D3F /* Info.plist */,
+				6AC51B1C30242C63CD56DE82 /* SunscreenWidget.swift */,
+				1B3E1F7E82A68D7E4A1930C6 /* SunscreenWidgetExtension.entitlements */,
+				EDEF528C023F14B2C5C85BDC /* SunscreenWidgetProvider.swift */,
+				30B895C2D6B058F7F6685C6E /* SunscreenWidgetViews.swift */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
+		F6485D4C749BC7A4EB9451BA = {
+			isa = PBXGroup;
+			children = (
+				5C25E6A4A2D1A508C6624585 /* App */,
+				33BCC5FB69A5935EEB6D6FD6 /* Shared */,
+				63CEEC9C7A41753871AAD23F /* Widget */,
+				0FB12BB51067D56D9F0141BF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4BD73F9D2B2C89B3B25CF73F /* SunscreenWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C8459D996743C7389D0B8B5A /* Build configuration list for PBXNativeTarget "SunscreenWidgetExtension" */;
+			buildPhases = (
+				873CEADCD373F92F51E8966E /* Sources */,
+				69041FEF092B365E63653665 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SunscreenWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = SunscreenWidgetExtension;
+			productReference = 196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		A042FE2CFD1D1B2B4D0E66C2 /* DoINeedSunscreen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03CB723800ECAC167BDDD742 /* Build configuration list for PBXNativeTarget "DoINeedSunscreen" */;
+			buildPhases = (
+				DBC56C6E55DB9608B76772CE /* Sources */,
+				2EC23BC0C688F780575232F8 /* Resources */,
+				3FCE0CC437A2C6E6F6D9F1E9 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C3D9A2E184454724AB705F7D /* PBXTargetDependency */,
+			);
+			name = DoINeedSunscreen;
+			packageProductDependencies = (
+			);
+			productName = DoINeedSunscreen;
+			productReference = F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DE2C7F2A080C799A977B852A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = F2AD90B914C57C47ACEB9E8B /* Build configuration list for PBXProject "DoINeedSunscreen" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = F6485D4C749BC7A4EB9451BA;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A042FE2CFD1D1B2B4D0E66C2 /* DoINeedSunscreen */,
+				4BD73F9D2B2C89B3B25CF73F /* SunscreenWidgetExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2EC23BC0C688F780575232F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7291A1C3269BCF03B85EEF52 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69041FEF092B365E63653665 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4B5B44AB3F6FD3FC2C65F00 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		873CEADCD373F92F51E8966E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30A14AB79942B735CDE63188 /* SunscreenAlgorithm.swift in Sources */,
+				A1904549F9CFA35B347C054C /* SunscreenWidget.swift in Sources */,
+				A9978BD38A2F14107835E8A9 /* SunscreenWidgetProvider.swift in Sources */,
+				41702BDE7F7AED552058C3F8 /* SunscreenWidgetViews.swift in Sources */,
+				19257AD2ACAE5FA2E0A8FF9F /* UserPreferences.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBC56C6E55DB9608B76772CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2338A6547C626172F747EBD /* ContentView.swift in Sources */,
+				2B712E1A1E39201C0583567F /* DoINeedSunscreenApp.swift in Sources */,
+				DCCA5F2B98B6E3874939F76F /* LocationManager.swift in Sources */,
+				5DE4FC50A98A1BD914BA7679 /* SkinTypeQuizView.swift in Sources */,
+				630D20B10900A16A5F732FA7 /* SunscreenAlgorithm.swift in Sources */,
+				EE7DF6B81086BF0C5173BC4E /* UserPreferences.swift in Sources */,
+				4D71419EF83B632C926DB20F /* WeatherService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C3D9A2E184454724AB705F7D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4BD73F9D2B2C89B3B25CF73F /* SunscreenWidgetExtension */;
+			targetProxy = 36A25205BD0D852659BA9DA0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6B42B58912582537E2B9EFCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Widget/SunscreenWidgetExtension.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.SunscreenWidget;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6E4EBDC44951CF2E132DB7AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		7A361C8B6ADCB23272CC7EB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		99BD598EB785847410908410 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Widget/SunscreenWidgetExtension.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.SunscreenWidget;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B13E39182BC78E98AF79E7C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/DoINeedSunscreen.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CEA53639EEF2232F2E38D0D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/DoINeedSunscreen.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		03CB723800ECAC167BDDD742 /* Build configuration list for PBXNativeTarget "DoINeedSunscreen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEA53639EEF2232F2E38D0D6 /* Debug */,
+				B13E39182BC78E98AF79E7C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C8459D996743C7389D0B8B5A /* Build configuration list for PBXNativeTarget "SunscreenWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B42B58912582537E2B9EFCE /* Debug */,
+				99BD598EB785847410908410 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F2AD90B914C57C47ACEB9E8B /* Build configuration list for PBXProject "DoINeedSunscreen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E4EBDC44951CF2E132DB7AB /* Debug */,
+				7A361C8B6ADCB23272CC7EB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DE2C7F2A080C799A977B852A /* Project object */;
+}

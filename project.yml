@@ -1,0 +1,55 @@
+name: DoINeedSunscreen
+options:
+  bundleIdPrefix: com.sunscreenfyi
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "15.0"
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+
+targets:
+  DoINeedSunscreen:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.sunscreenfyi.DoINeedSunscreen
+        INFOPLIST_FILE: Info.plist
+        CODE_SIGN_ENTITLEMENTS: App/DoINeedSunscreen.entitlements
+        GENERATE_INFOPLIST_FILE: true
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: 1
+    entitlements:
+      path: App/DoINeedSunscreen.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.sunscreenfyi.shared
+        com.apple.developer.weatherkit: true
+    dependencies:
+      - target: SunscreenWidgetExtension
+
+  SunscreenWidgetExtension:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Widget
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.sunscreenfyi.DoINeedSunscreen.SunscreenWidget
+        INFOPLIST_FILE: Widget/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Widget/SunscreenWidgetExtension.entitlements
+        GENERATE_INFOPLIST_FILE: true
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: 1
+    entitlements:
+      path: Widget/SunscreenWidgetExtension.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.sunscreenfyi.shared
+        com.apple.developer.weatherkit: true
