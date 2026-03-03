@@ -38,6 +38,7 @@ struct ContentView: View {
     @State private var showTimePicker = false
     @State private var customLocation: CLLocation?
     @State private var customLocationName: String?
+    @State private var customTimeZone: TimeZone?
     @State private var selectedTime: Date?
     @State private var showDoctorModal = false
 
@@ -45,7 +46,8 @@ struct ContentView: View {
         guard let location = activeLocation else {
             return weatherService.uvIndex == 0
         }
-        return !SolarCalculator.isDaylight(at: displayTime, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        let tz = customTimeZone ?? .current
+        return !SolarCalculator.isDaylight(at: displayTime, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, timeZone: tz)
     }
 
     private var bgColor: Color {
@@ -141,9 +143,10 @@ struct ContentView: View {
             SkinTypeQuizView(isPresented: $showQuiz, preferences: preferences)
         }
         .sheet(isPresented: $showLocationChange) {
-            LocationChangeView(isPresented: $showLocationChange) { location, name, elevation in
+            LocationChangeView(isPresented: $showLocationChange) { location, name, elevation, timeZone in
                 customLocation = location
                 customLocationName = name
+                customTimeZone = timeZone
                 if let elevation = elevation {
                     preferences.elevationFeet = elevation * 3.28084
                 }
@@ -314,6 +317,7 @@ struct ContentView: View {
                             Button("reset") {
                                 customLocation = nil
                                 customLocationName = nil
+                                customTimeZone = nil
                                 if let loc = locationManager.location {
                                     let alt = loc.altitude
                                     if alt >= 0 { preferences.elevationFeet = alt * 3.28084 }

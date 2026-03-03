@@ -5,8 +5,8 @@ import Foundation
 struct SolarCalculator {
 
     /// Returns true if the sun is above the horizon at the given time and location.
-    static func isDaylight(at date: Date, latitude: Double, longitude: Double) -> Bool {
-        let (sunrise, sunset) = sunriseSunset(for: date, latitude: latitude, longitude: longitude)
+    static func isDaylight(at date: Date, latitude: Double, longitude: Double, timeZone: TimeZone = .current) -> Bool {
+        let (sunrise, sunset) = sunriseSunset(for: date, latitude: latitude, longitude: longitude, timeZone: timeZone)
         guard let sr = sunrise, let ss = sunset else {
             // Polar day/night: if no sunrise/sunset, check if we're in polar day
             // At high latitudes in summer, the sun never sets
@@ -21,9 +21,9 @@ struct SolarCalculator {
 
     /// Calculate sunrise and sunset times for a given date and location.
     /// Returns nil for either if the sun doesn't rise or set (polar regions).
-    static func sunriseSunset(for date: Date, latitude: Double, longitude: Double) -> (sunrise: Date?, sunset: Date?) {
+    static func sunriseSunset(for date: Date, latitude: Double, longitude: Double, timeZone: TimeZone = .current) -> (sunrise: Date?, sunset: Date?) {
         let cal = Calendar.current
-        let tz = TimeZone.current
+        let tz = timeZone
 
         // Day of year
         let dayOfYear = Double(cal.ordinality(of: .day, in: .year, for: date) ?? 1)

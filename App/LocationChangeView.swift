@@ -3,7 +3,7 @@ import CoreLocation
 
 struct LocationChangeView: View {
     @Binding var isPresented: Bool
-    let onLocationSelected: (CLLocation, String, Double?) -> Void
+    let onLocationSelected: (CLLocation, String, Double?, TimeZone?) -> Void
 
     @State private var searchText = ""
     @State private var isSearching = false
@@ -148,7 +148,8 @@ struct LocationChangeView: View {
                         name: name,
                         detail: detail,
                         location: location,
-                        elevation: location.altitude
+                        elevation: location.altitude,
+                        timeZone: placemark.timeZone
                     )
                 }
             }
@@ -157,7 +158,7 @@ struct LocationChangeView: View {
 
     private func selectLocation(_ result: GeocodedLocation) {
         let elevation: Double? = result.elevation > 0 ? result.elevation : nil
-        onLocationSelected(result.location, result.name, elevation)
+        onLocationSelected(result.location, result.name, elevation, result.timeZone)
         isPresented = false
     }
 }
@@ -168,4 +169,5 @@ struct GeocodedLocation: Identifiable {
     let detail: String?
     let location: CLLocation
     let elevation: Double
+    let timeZone: TimeZone?
 }
