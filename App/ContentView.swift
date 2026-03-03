@@ -62,6 +62,17 @@ struct ContentView: View {
         customLocation != nil
     }
 
+    private var skinTypeBinding: Binding<Double> {
+        Binding(
+            get: { Double(preferences.skinType.rawValue) },
+            set: { newValue in
+                if let type = SkinType(rawValue: Int(newValue)) {
+                    preferences.skinType = type
+                }
+            }
+        )
+    }
+
     var body: some View {
         ZStack {
             // Full-screen background
@@ -317,7 +328,8 @@ struct ContentView: View {
                     .font(.system(size: 14).italic())
                     .foregroundColor(.white.opacity(0.85))
 
-                skinTypeSlider
+                Slider(value: skinTypeBinding, in: 1...6, step: 1)
+                    .tint(.blue)
             }
 
             // Time Outdoors Slider
@@ -425,47 +437,6 @@ struct ContentView: View {
                 .fill(Color(hex: preferences.skinType.swatchColorHex))
         )
         .padding(.bottom, 20)
-    }
-
-    // MARK: - Skin Type Slider (custom to match website)
-
-    private var skinTypeSlider: some View {
-        GeometryReader { geo in
-            let totalWidth = geo.size.width
-            let steps = 5 // 6 types, 5 intervals
-            let currentStep = CGFloat(preferences.skinType.rawValue - 1)
-            let thumbX = (currentStep / CGFloat(steps)) * totalWidth
-
-            ZStack(alignment: .leading) {
-                // Track
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.white.opacity(0.3))
-                    .frame(height: 8)
-
-                // Filled portion
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.blue)
-                    .frame(width: max(thumbX, 0), height: 8)
-
-                // Thumb
-                Circle()
-                    .fill(Color.blue)
-                    .frame(width: 24, height: 24)
-                    .shadow(color: .black.opacity(0.3), radius: 3, y: 2)
-                    .offset(x: thumbX - 12)
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { value in
-                                let fraction = min(max(value.location.x / totalWidth, 0), 1)
-                                let step = Int(round(fraction * CGFloat(steps))) + 1
-                                if let type = SkinType(rawValue: step) {
-                                    preferences.skinType = type
-                                }
-                            }
-                    )
-            }
-        }
-        .frame(height: 24)
     }
 
     // MARK: - Share Text
