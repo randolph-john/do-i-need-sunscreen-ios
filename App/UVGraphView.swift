@@ -111,6 +111,16 @@ struct UVGraphView: View {
         }
 
         ZStack(alignment: .topLeading) {
+            // Layout-based scroll anchors (invisible, for ScrollViewReader)
+            HStack(spacing: 0) {
+                ForEach(0..<data.count, id: \.self) { i in
+                    Color.clear
+                        .frame(width: pointSpacing, height: 1)
+                        .id(i)
+                }
+            }
+            .padding(.leading, edgePadding - pointSpacing / 2)
+
             // Horizontal grid lines
             ForEach([0, 3, 6, 9, 11], id: \.self) { level in
                 let y = yPadding + plotHeight * (1 - CGFloat(level) / CGFloat(maxUV))
@@ -200,7 +210,6 @@ struct UVGraphView: View {
                                    height: isSelected ? 9 : isRealNow ? 7 : 5)
                     }
                     .position(x: points[i].x, y: points[i].y)
-                    .id(i)
                 }
 
                 // Invisible tap targets (full column width for easy tapping)
