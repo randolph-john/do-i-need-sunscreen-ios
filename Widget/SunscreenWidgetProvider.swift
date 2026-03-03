@@ -82,27 +82,59 @@ struct SunscreenWidgetProvider: TimelineProvider {
             do {
                 let weather = try await weatherService.weather(for: location)
                 let uvIndex = Double(weather.currentWeather.uvIndex.value)
-                let cloudCover = mapCloudCover(weather.currentWeather.cloudCover)
 
-                // Use live cloud cover from WeatherKit, other settings from user preferences
-                let needs = SunscreenAlgorithm.needsSunscreen(
-                    uvIndex: uvIndex,
-                    skinType: preferences.skinType,
-                    durationMinutes: preferences.durationMinutes,
-                    cloudCover: cloudCover,
-                    surface: preferences.surface,
-                    elevationFeet: preferences.elevationFeet,
-                    otherFactors: preferences.otherFactors
-                )
+                // Map hourly forecast for integrated UV dose calculation
+                let forecast = weather.hourlyForecast.forecast.prefix(48).map { hour in
+                    HourlyUV(
+                        date: hour.date,
+                        uvIndex: Double(hour.uvIndex.value),
+                        cloudCover: mapCloudCover(hour.cloudCover)
+                    )
+                }
 
-                let safeTime = SunscreenAlgorithm.safeExposureTime(
-                    uvIndex: uvIndex,
-                    skinType: preferences.skinType,
-                    cloudCover: cloudCover,
-                    surface: preferences.surface,
-                    elevationFeet: preferences.elevationFeet,
-                    otherFactors: preferences.otherFactors
-                )
+                let now = Date()
+                let needs: Bool
+                let safeTime: Int?
+
+                if !forecast.isEmpty {
+                    needs = SunscreenAlgorithm.needsSunscreen(
+                        hourlyForecast: forecast,
+                        startTime: now,
+                        skinType: preferences.skinType,
+                        durationMinutes: preferences.durationMinutes,
+                        surface: preferences.surface,
+                        elevationFeet: preferences.elevationFeet,
+                        otherFactors: preferences.otherFactors
+                    )
+                    safeTime = SunscreenAlgorithm.safeExposureTime(
+                        hourlyForecast: forecast,
+                        startTime: now,
+                        skinType: preferences.skinType,
+                        surface: preferences.surface,
+                        elevationFeet: preferences.elevationFeet,
+                        otherFactors: preferences.otherFactors
+                    )
+                } else {
+                    // Fallback to single-UV method
+                    let cloudCover = mapCloudCover(weather.currentWeather.cloudCover)
+                    needs = SunscreenAlgorithm.needsSunscreen(
+                        uvIndex: uvIndex,
+                        skinType: preferences.skinType,
+                        durationMinutes: preferences.durationMinutes,
+                        cloudCover: cloudCover,
+                        surface: preferences.surface,
+                        elevationFeet: preferences.elevationFeet,
+                        otherFactors: preferences.otherFactors
+                    )
+                    safeTime = SunscreenAlgorithm.safeExposureTime(
+                        uvIndex: uvIndex,
+                        skinType: preferences.skinType,
+                        cloudCover: cloudCover,
+                        surface: preferences.surface,
+                        elevationFeet: preferences.elevationFeet,
+                        otherFactors: preferences.otherFactors
+                    )
+                }
 
                 let entry = SunscreenEntry(
                     date: Date(),

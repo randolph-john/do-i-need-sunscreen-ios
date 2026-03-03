@@ -178,6 +178,14 @@ enum OtherFactor: String, CaseIterable, Codable {
     }
 }
 
+// MARK: - Hourly UV Data (for forecast integration)
+
+struct HourlyUV {
+    let date: Date
+    let uvIndex: Double
+    let cloudCover: CloudCover
+}
+
 // MARK: - Sunscreen Algorithm
 
 struct SunscreenAlgorithm {
@@ -280,6 +288,156 @@ struct SunscreenAlgorithm {
             return "\(hours)h"
         }
         return "\(hours)h \(remainingMinutes)min"
+    }
+
+    // MARK: - Forecast-Aware Methods
+
+    /// Find the nearest forecast entry to a given time
+    private static func nearestEntry(in sorted: [HourlyUV], to time: Date) -> HourlyUV? {
+        sorted.min(by: {
+            abs($0.date.timeIntervalSince(time)) < abs($1.date.timeIntervalSince(time))
+        })
+    }
+
+    /// Calculate the next hour boundary after a given time
+    private static func nextHourBoundary(after time: Date) -> Date {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day, .hour], from: time)
+        let hourStart = calendar.date(from: components)!
+        return hourStart.addingTimeInterval(3600)
+    }
+
+    /// Integrate UV dose over the duration window using hourly forecast data.
+    /// Walks from startTime to startTime + durationMinutes, using per-hour UV
+    /// and cloud cover from the forecast instead of assuming constant values.
+    static func integratedUVDose(
+        hourlyForecast: [HourlyUV],
+        startTime: Date,
+        durationMinutes: Double,
+        surface: SurfaceType,
+        elevationFeet: Double
+    ) -> Double {
+        guard !hourlyForecast.isEmpty, durationMinutes > 0 else { return 0 }
+
+        let sorted = hourlyForecast.sorted { $0.date < $1.date }
+        let endTime = startTime.addingTimeInterval(durationMinutes * 60)
+        let altitudeKm = elevationFeet * 0.0003048
+        let altitudeFactor = 1.0 + (altitudeKm * 0.06)
+
+        var totalDose = 0.0
+        var currentTime = startTime
+
+        while currentTime < endTime {
+            guard let nearest = nearestEntry(in: sorted, to: currentTime) else { break }
+
+            let segmentEnd = min(nextHourBoundary(after: currentTime), endTime)
+            guard segmentEnd > currentTime else { break }
+
+            let segmentMinutes = segmentEnd.timeIntervalSince(currentTime) / 60.0
+
+            let segmentDose = (nearest.uvIndex * segmentMinutes / 60.0)
+                * absorptionFactor
+                * nearest.cloudCover.factor
+                * surface.factor
+                * altitudeFactor
+
+            totalDose += segmentDose
+            currentTime = segmentEnd
+        }
+
+        return totalDose
+    }
+
+    /// Determine whether sunscreen is needed using hourly forecast integration.
+    static func needsSunscreen(
+        hourlyForecast: [HourlyUV],
+        startTime: Date,
+        skinType: SkinType,
+        durationMinutes: Double,
+        surface: SurfaceType,
+        elevationFeet: Double,
+        otherFactors: Set<OtherFactor>
+    ) -> Bool {
+        let dose = integratedUVDose(
+            hourlyForecast: hourlyForecast,
+            startTime: startTime,
+            durationMinutes: durationMinutes,
+            surface: surface,
+            elevationFeet: elevationFeet
+        )
+
+        if dose == 0 { return false }
+
+        let medThreshold = adjustedMED(baseMED: skinType.med, otherFactors: otherFactors)
+        return dose > medThreshold
+    }
+
+    /// Get safe exposure time using hourly forecast integration.
+    /// Walks hour-by-hour from startTime, accumulating dose until it exceeds MED.
+    /// Returns elapsed minutes at that point, or nil if dose never exceeds MED
+    /// within the available forecast window.
+    static func safeExposureTime(
+        hourlyForecast: [HourlyUV],
+        startTime: Date,
+        skinType: SkinType,
+        surface: SurfaceType,
+        elevationFeet: Double,
+        otherFactors: Set<OtherFactor>
+    ) -> Int? {
+        guard !hourlyForecast.isEmpty else { return nil }
+
+        let sorted = hourlyForecast.sorted { $0.date < $1.date }
+        let medThreshold = adjustedMED(baseMED: skinType.med, otherFactors: otherFactors)
+        let altitudeKm = elevationFeet * 0.0003048
+        let altitudeFactor = 1.0 + (altitudeKm * 0.06)
+
+        // Walk up to 1 hour past the last forecast entry
+        guard let lastEntry = sorted.last else { return nil }
+        let maxEndTime = lastEntry.date.addingTimeInterval(3600)
+
+        var totalDose = 0.0
+        var currentTime = startTime
+        var elapsedMinutes = 0.0
+
+        while currentTime < maxEndTime {
+            guard let nearest = nearestEntry(in: sorted, to: currentTime) else { break }
+
+            let segmentEnd = min(nextHourBoundary(after: currentTime), maxEndTime)
+            guard segmentEnd > currentTime else { break }
+
+            let segmentMinutes = segmentEnd.timeIntervalSince(currentTime) / 60.0
+
+            if nearest.uvIndex <= 0 {
+                // No UV exposure in this segment, just advance time
+                elapsedMinutes += segmentMinutes
+                currentTime = segmentEnd
+                continue
+            }
+
+            // Dose rate per minute for this hour's UV
+            let dosePerMinute = (nearest.uvIndex / 60.0)
+                * absorptionFactor
+                * nearest.cloudCover.factor
+                * surface.factor
+                * altitudeFactor
+
+            let remainingDose = medThreshold - totalDose
+            let minutesToExceed = remainingDose / dosePerMinute
+
+            if minutesToExceed <= segmentMinutes {
+                // MED exceeded within this segment
+                elapsedMinutes += minutesToExceed
+                return Int(elapsedMinutes.rounded())
+            }
+
+            // Add full segment dose and advance
+            totalDose += dosePerMinute * segmentMinutes
+            elapsedMinutes += segmentMinutes
+            currentTime = segmentEnd
+        }
+
+        // Never exceeded MED within forecast window
+        return nil
     }
 }
 

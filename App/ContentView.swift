@@ -171,24 +171,66 @@ struct ContentView: View {
 
     // MARK: - Algorithm Result
 
+    private func cloudCoverFromFraction(_ fraction: Double) -> CloudCover {
+        switch fraction {
+        case 0..<0.25: return .clear
+        case 0.25..<0.50: return .scattered
+        case 0.50..<0.875: return .broken
+        default: return .overcast
+        }
+    }
+
     private var result: SunscreenResult {
-        let needs = SunscreenAlgorithm.needsSunscreen(
-            uvIndex: weatherService.uvIndex,
-            skinType: preferences.skinType,
-            durationMinutes: preferences.durationMinutes,
-            cloudCover: weatherService.cloudCover,
-            surface: preferences.surface,
-            elevationFeet: preferences.elevationFeet,
-            otherFactors: preferences.otherFactors
-        )
-        let safeTime = SunscreenAlgorithm.safeExposureTime(
-            uvIndex: weatherService.uvIndex,
-            skinType: preferences.skinType,
-            cloudCover: weatherService.cloudCover,
-            surface: preferences.surface,
-            elevationFeet: preferences.elevationFeet,
-            otherFactors: preferences.otherFactors
-        )
+        let forecast = weatherService.hourlyForecast.map { hour in
+            HourlyUV(
+                date: hour.date,
+                uvIndex: hour.uvIndex,
+                cloudCover: cloudCoverFromFraction(hour.cloudCover)
+            )
+        }
+
+        let needs: Bool
+        let safeTime: Int?
+
+        if !forecast.isEmpty {
+            needs = SunscreenAlgorithm.needsSunscreen(
+                hourlyForecast: forecast,
+                startTime: displayTime,
+                skinType: preferences.skinType,
+                durationMinutes: preferences.durationMinutes,
+                surface: preferences.surface,
+                elevationFeet: preferences.elevationFeet,
+                otherFactors: preferences.otherFactors
+            )
+            safeTime = SunscreenAlgorithm.safeExposureTime(
+                hourlyForecast: forecast,
+                startTime: displayTime,
+                skinType: preferences.skinType,
+                surface: preferences.surface,
+                elevationFeet: preferences.elevationFeet,
+                otherFactors: preferences.otherFactors
+            )
+        } else {
+            // Fallback to single-UV method when forecast hasn't loaded
+            needs = SunscreenAlgorithm.needsSunscreen(
+                uvIndex: weatherService.uvIndex,
+                skinType: preferences.skinType,
+                durationMinutes: preferences.durationMinutes,
+                cloudCover: weatherService.cloudCover,
+                surface: preferences.surface,
+                elevationFeet: preferences.elevationFeet,
+                otherFactors: preferences.otherFactors
+            )
+            safeTime = SunscreenAlgorithm.safeExposureTime(
+                uvIndex: weatherService.uvIndex,
+                skinType: preferences.skinType,
+                cloudCover: weatherService.cloudCover,
+                surface: preferences.surface,
+                elevationFeet: preferences.elevationFeet,
+                otherFactors: preferences.otherFactors
+            )
+        }
+
         let reapply = SunscreenAlgorithm.reapplicationTime(
             uvIndex: weatherService.uvIndex,
             skinType: preferences.skinType,
