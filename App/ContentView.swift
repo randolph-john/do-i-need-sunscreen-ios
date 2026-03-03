@@ -176,7 +176,7 @@ struct ContentView: View {
             uvIndex: weatherService.uvIndex,
             skinType: preferences.skinType,
             durationMinutes: preferences.durationMinutes,
-            cloudCover: preferences.cloudCover,
+            cloudCover: weatherService.cloudCover,
             surface: preferences.surface,
             elevationFeet: preferences.elevationFeet,
             otherFactors: preferences.otherFactors
@@ -184,7 +184,7 @@ struct ContentView: View {
         let safeTime = SunscreenAlgorithm.safeExposureTime(
             uvIndex: weatherService.uvIndex,
             skinType: preferences.skinType,
-            cloudCover: preferences.cloudCover,
+            cloudCover: weatherService.cloudCover,
             surface: preferences.surface,
             elevationFeet: preferences.elevationFeet,
             otherFactors: preferences.otherFactors
@@ -296,6 +296,11 @@ struct ContentView: View {
                 Text("UV Index: \(Int(weatherService.uvIndex))")
                     .font(.system(size: 20, weight: .medium))
                     .foregroundColor(textColor)
+
+                Text("Cloud Cover: \(weatherService.cloudCover.displayName)")
+                    .font(.system(size: 14))
+                    .foregroundColor(textColor.opacity(0.8))
+                    .italic()
 
                 if let name = activeLocationName {
                     HStack(spacing: 4) {
@@ -422,26 +427,6 @@ struct ContentView: View {
                     .tint(.blue)
             }
 
-            // Cloud Cover Toggle Buttons
-            VStack(spacing: 10) {
-                Text("Cloud Cover")
-                    .font(.system(size: 17, weight: .medium))
-                    .foregroundColor(.white)
-
-                FlowLayout(spacing: 8) {
-                    ForEach(CloudCover.allCases, id: \.self) { cloud in
-                        TogglePill(
-                            label: cloud == .scattered ? "Scattered Clouds"
-                                : cloud == .broken ? "Broken Clouds"
-                                : cloud.displayName,
-                            isSelected: preferences.cloudCover == cloud
-                        ) {
-                            preferences.cloudCover = cloud
-                        }
-                    }
-                }
-            }
-
             // Surface Toggle Buttons
             VStack(spacing: 10) {
                 Text("Surface")
@@ -553,7 +538,7 @@ struct ContentView: View {
         }
 
         let headline = "\(emoji) \(subject) \(verb) sunscreen right now!"
-        let skin = "Skin: \(preferences.skinType.label) · UV: \(uvInt) · \(preferences.cloudCover.displayName)"
+        let skin = "Skin: \(preferences.skinType.label) · UV: \(uvInt) · \(weatherService.cloudCover.displayName)"
         var location = ""
         if let name = activeLocationName {
             location = "📍 \(name) · \(Int(preferences.elevationFeet)) ft"

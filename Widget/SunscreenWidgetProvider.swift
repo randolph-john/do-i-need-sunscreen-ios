@@ -60,6 +60,15 @@ struct SunscreenWidgetProvider: TimelineProvider {
         return CLLocation(latitude: lat, longitude: lon)
     }
 
+    private func mapCloudCover(_ fraction: Double) -> CloudCover {
+        switch fraction {
+        case 0..<0.25: return .clear
+        case 0.25..<0.50: return .scattered
+        case 0.50..<0.875: return .broken
+        default: return .overcast
+        }
+    }
+
     private func fetchEntry(completion: @escaping (SunscreenEntry) -> Void) {
         guard let location = getLocation() else {
             completion(.placeholder)
@@ -73,13 +82,14 @@ struct SunscreenWidgetProvider: TimelineProvider {
             do {
                 let weather = try await weatherService.weather(for: location)
                 let uvIndex = Double(weather.currentWeather.uvIndex.value)
+                let cloudCover = mapCloudCover(weather.currentWeather.cloudCover)
 
-                // Use the user's saved preferences, not live weather data
+                // Use live cloud cover from WeatherKit, other settings from user preferences
                 let needs = SunscreenAlgorithm.needsSunscreen(
                     uvIndex: uvIndex,
                     skinType: preferences.skinType,
                     durationMinutes: preferences.durationMinutes,
-                    cloudCover: preferences.cloudCover,
+                    cloudCover: cloudCover,
                     surface: preferences.surface,
                     elevationFeet: preferences.elevationFeet,
                     otherFactors: preferences.otherFactors
@@ -88,7 +98,7 @@ struct SunscreenWidgetProvider: TimelineProvider {
                 let safeTime = SunscreenAlgorithm.safeExposureTime(
                     uvIndex: uvIndex,
                     skinType: preferences.skinType,
-                    cloudCover: preferences.cloudCover,
+                    cloudCover: cloudCover,
                     surface: preferences.surface,
                     elevationFeet: preferences.elevationFeet,
                     otherFactors: preferences.otherFactors

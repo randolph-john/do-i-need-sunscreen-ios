@@ -14,10 +14,6 @@ class UserPreferences: ObservableObject {
         didSet { defaults.set(durationMinutes, forKey: "durationMinutes"); reloadWidgets() }
     }
 
-    @Published var cloudCover: CloudCover {
-        didSet { defaults.set(cloudCover.rawValue, forKey: "cloudCover"); reloadWidgets() }
-    }
-
     @Published var surface: SurfaceType {
         didSet { defaults.set(surface.rawValue, forKey: "surface"); reloadWidgets() }
     }
@@ -47,9 +43,6 @@ class UserPreferences: ObservableObject {
 
         let duration = defaults.double(forKey: "durationMinutes")
         self.durationMinutes = duration > 0 ? duration : 60
-
-        let rawCloud = defaults.string(forKey: "cloudCover") ?? ""
-        self.cloudCover = CloudCover(rawValue: rawCloud) ?? .clear
 
         let rawSurface = defaults.string(forKey: "surface") ?? ""
         self.surface = SurfaceType(rawValue: rawSurface) ?? .none
