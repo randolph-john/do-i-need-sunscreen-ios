@@ -488,6 +488,21 @@ struct ContentView: View {
                     .transition(.opacity)
                 }
             }
+
+            // Divider
+            Rectangle()
+                .fill(Color.white.opacity(0.2))
+                .frame(height: 1)
+                .padding(.horizontal)
+
+            // UV Graph
+            UVGraphView(
+                hourlyForecast: weatherService.hourlyForecast,
+                selectedTime: selectedTime
+            ) { date in
+                selectedTime = date
+                weatherService.selectTime(date)
+            }
         }
         .padding(24)
         .background(
