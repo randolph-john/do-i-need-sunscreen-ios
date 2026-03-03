@@ -48,12 +48,14 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private func reverseGeocode(_ location: CLLocation) {
         geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
             guard let placemark = placemarks?.first else { return }
+            let neighborhood = placemark.subLocality
             let city = placemark.locality
             let state = placemark.administrativeArea
             let country = placemark.isoCountryCode
 
             var parts: [String] = []
-            if let city = city { parts.append(city) }
+            if let neighborhood = neighborhood { parts.append(neighborhood) }
+            if let city = city, city != neighborhood { parts.append(city) }
             if let state = state { parts.append(state) }
             if parts.isEmpty, let country = country { parts.append(country) }
 

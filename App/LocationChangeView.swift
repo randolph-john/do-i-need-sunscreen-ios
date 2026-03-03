@@ -124,18 +124,20 @@ struct LocationChangeView: View {
                 results = placemarks.compactMap { placemark in
                     guard let location = placemark.location else { return nil }
 
+                    let placemarkName = placemark.name
+                    let subLocality = placemark.subLocality
                     let city = placemark.locality
                     let state = placemark.administrativeArea
                     let country = placemark.country
-                    let countryCode = placemark.isoCountryCode
 
-                    // Build display name
+                    // Build display name — use the most specific info available
+                    // placemark.name is often a landmark, address, or POI name
                     var nameParts: [String] = []
-                    if let city = city { nameParts.append(city) }
+                    if let placemarkName = placemarkName { nameParts.append(placemarkName) }
+                    if let subLocality = subLocality, subLocality != placemarkName { nameParts.append(subLocality) }
+                    if let city = city, city != placemarkName, city != subLocality { nameParts.append(city) }
                     if let state = state { nameParts.append(state) }
-                    let name = nameParts.isEmpty
-                        ? (placemark.name ?? query)
-                        : nameParts.joined(separator: ", ")
+                    let name = nameParts.isEmpty ? query : nameParts.joined(separator: ", ")
 
                     // Build detail line
                     var detailParts: [String] = []

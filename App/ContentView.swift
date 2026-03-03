@@ -292,12 +292,12 @@ struct ContentView: View {
     @ViewBuilder
     private var uvInfoSection: some View {
         if !weatherService.isLoading && locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways {
-            VStack(spacing: 6) {
+            VStack(spacing: 2) {
                 Text("UV Index: \(Int(weatherService.uvIndex))")
                     .font(.system(size: 20, weight: .medium))
                     .foregroundColor(textColor)
 
-                Text("Cloud Cover: \(weatherService.cloudCover.displayName)")
+                Text("Cloud Cover: \(weatherService.cloudCoverPercent)%")
                     .font(.system(size: 14))
                     .foregroundColor(textColor.opacity(0.8))
                     .italic()

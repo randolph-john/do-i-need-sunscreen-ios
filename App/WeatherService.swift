@@ -12,6 +12,7 @@ struct HourlyUVData: Identifiable {
 class WeatherService: ObservableObject {
     @Published var uvIndex: Double = 0
     @Published var cloudCover: CloudCover = .clear
+    @Published var cloudCoverPercent: Int = 0
     @Published var isDaylight: Bool = true
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
@@ -28,6 +29,7 @@ class WeatherService: ObservableObject {
             let weather = try await service.weather(for: location)
             uvIndex = Double(weather.currentWeather.uvIndex.value)
             cloudCover = mapCloudCover(weather.currentWeather.cloudCover)
+            cloudCoverPercent = Int(round(weather.currentWeather.cloudCover * 100))
             isDaylight = weather.currentWeather.isDaylight
 
             // Store hourly forecast
@@ -67,6 +69,7 @@ class WeatherService: ObservableObject {
             if let now = forecastEntry(at: Date()) {
                 uvIndex = now.uvIndex
                 cloudCover = mapCloudCover(now.cloudCover)
+                cloudCoverPercent = Int(round(now.cloudCover * 100))
                 isDaylight = now.isDaylight
             }
             return
@@ -74,6 +77,7 @@ class WeatherService: ObservableObject {
         if let entry = forecastEntry(at: date) {
             uvIndex = entry.uvIndex
             cloudCover = mapCloudCover(entry.cloudCover)
+            cloudCoverPercent = Int(round(entry.cloudCover * 100))
             isDaylight = entry.isDaylight
         }
     }

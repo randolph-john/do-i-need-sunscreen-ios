@@ -1,88 +1,23 @@
 import SwiftUI
 
-enum GraphMode: String {
-    case today, now, tomorrow
-}
-
 struct UVGraphView: View {
     let hourlyForecast: [HourlyUVData]
     let selectedTime: Date?
     let onTimeSelect: (Date) -> Void
 
-    @State private var graphMode: GraphMode = .now
-    @State private var graphOffset: Int = 0
+    private let chartHeight: CGFloat = 200
 
-    private let chartHeight: CGFloat = 180
-    private let windowSize = 12
-
-    // MARK: - Data windowing
-
-    private var windowedData: [HourlyUVData] {
-        let sorted = hourlyForecast.sorted { $0.date < $1.date }
-        guard !sorted.isEmpty else { return [] }
-
-        let startIndex: Int
-        switch graphMode {
-        case .now:
-            let now = Date()
-            startIndex = sorted.firstIndex(where: { $0.date >= now }) ?? 0
-        case .today:
-            let startOfDay = Calendar.current.startOfDay(for: Date())
-            startIndex = sorted.firstIndex(where: { $0.date >= startOfDay }) ?? 0
-        case .tomorrow:
-            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())) ?? Date()
-            startIndex = sorted.firstIndex(where: { $0.date >= tomorrow }) ?? max(sorted.count - windowSize, 0)
-        }
-
-        let adjustedStart = max(0, min(startIndex + (graphOffset * windowSize), sorted.count - windowSize))
-        let end = min(adjustedStart + windowSize, sorted.count)
-        return Array(sorted[adjustedStart..<end])
-    }
-
-    private var canGoLeft: Bool {
-        let sorted = hourlyForecast.sorted { $0.date < $1.date }
-        guard !sorted.isEmpty else { return false }
-        let startIndex: Int
-        switch graphMode {
-        case .now:
-            startIndex = sorted.firstIndex(where: { $0.date >= Date() }) ?? 0
-        case .today:
-            startIndex = sorted.firstIndex(where: { $0.date >= Calendar.current.startOfDay(for: Date()) }) ?? 0
-        case .tomorrow:
-            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())) ?? Date()
-            startIndex = sorted.firstIndex(where: { $0.date >= tomorrow }) ?? max(sorted.count - windowSize, 0)
-        }
-        return startIndex + ((graphOffset - 1) * windowSize) >= 0
-    }
-
-    private var canGoRight: Bool {
-        let sorted = hourlyForecast.sorted { $0.date < $1.date }
-        guard !sorted.isEmpty else { return false }
-        let startIndex: Int
-        switch graphMode {
-        case .now:
-            startIndex = sorted.firstIndex(where: { $0.date >= Date() }) ?? 0
-        case .today:
-            startIndex = sorted.firstIndex(where: { $0.date >= Calendar.current.startOfDay(for: Date()) }) ?? 0
-        case .tomorrow:
-            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())) ?? Date()
-            startIndex = sorted.firstIndex(where: { $0.date >= tomorrow }) ?? max(sorted.count - windowSize, 0)
-        }
-        return startIndex + ((graphOffset + 1) * windowSize) + windowSize <= sorted.count
+    private var allSortedData: [HourlyUVData] {
+        hourlyForecast.sorted { $0.date < $1.date }
     }
 
     var body: some View {
         VStack(spacing: 12) {
-            // Title
-            Text("12-hour UV window")
+            Text("UV Forecast")
                 .font(.system(size: 17, weight: .medium))
                 .foregroundColor(.white)
 
-            // Navigation row
-            navigationRow
-
-            // Chart
-            if windowedData.isEmpty {
+            if allSortedData.isEmpty {
                 Text("Loading UV trend data...")
                     .font(.system(size: 14))
                     .foregroundColor(.white.opacity(0.6))
@@ -93,169 +28,265 @@ struct UVGraphView: View {
         }
     }
 
-    // MARK: - Navigation Row
-
-    private var navigationRow: some View {
-        HStack(spacing: 12) {
-            Button {
-                if canGoLeft { graphOffset -= 1 }
-            } label: {
-                Text("←")
-                    .font(.system(size: 18))
-                    .foregroundColor(canGoLeft ? .white : .white.opacity(0.3))
-                    .frame(width: 36, height: 36)
-                    .background(Circle().fill(Color.white.opacity(canGoLeft ? 0.15 : 0.05)))
-            }
-            .disabled(!canGoLeft)
-
-            HStack(spacing: 6) {
-                modeButton("Today", mode: .today)
-                modeButton("Now", mode: .now)
-                modeButton("Tomorrow", mode: .tomorrow)
-            }
-
-            Button {
-                if canGoRight { graphOffset += 1 }
-            } label: {
-                Text("→")
-                    .font(.system(size: 18))
-                    .foregroundColor(canGoRight ? .white : .white.opacity(0.3))
-                    .frame(width: 36, height: 36)
-                    .background(Circle().fill(Color.white.opacity(canGoRight ? 0.15 : 0.05)))
-            }
-            .disabled(!canGoRight)
-        }
-    }
-
-    private func modeButton(_ label: String, mode: GraphMode) -> some View {
-        let isActive = graphMode == mode && graphOffset == 0
-        return Button {
-            graphMode = mode
-            graphOffset = 0
-        } label: {
-            Text(label)
-                .font(.system(size: 11, weight: .medium))
-                .foregroundColor(isActive ? .white : .black)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
-                .background(
-                    RoundedRectangle(cornerRadius: 5)
-                        .fill(isActive ? Color(hex: "#FFD700") : Color(hex: "#F0F0F0"))
-                )
-        }
-    }
-
     // MARK: - Chart
 
     private var chartView: some View {
-        let data = windowedData
+        let data = allSortedData
         let maxUV: Double = 11
 
         return GeometryReader { geo in
-            let chartWidth = geo.size.width - 30 // leave space for Y axis
-            let xOrigin: CGFloat = 30
+            let yAxisWidth: CGFloat = 28
+            let visibleChartWidth = geo.size.width - yAxisWidth
+            let pointSpacing = visibleChartWidth / 11
+            let edgePadding = pointSpacing / 2
+            let totalWidth = pointSpacing * CGFloat(data.count - 1) + edgePadding * 2
             let yPadding: CGFloat = 20
-            let plotHeight = chartHeight - yPadding * 2
+            let xLabelHeight: CGFloat = 16
+            let plotHeight = chartHeight - yPadding - xLabelHeight
 
-            ZStack(alignment: .topLeading) {
-                // Background
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.black.opacity(0.15))
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.black.opacity(0.2))
 
-                // Grid lines
-                ForEach([0, 3, 6, 9, 11], id: \.self) { level in
-                    let y = yPadding + plotHeight * (1 - CGFloat(level) / CGFloat(maxUV))
-
-                    // Grid line
-                    Path { path in
-                        path.move(to: CGPoint(x: xOrigin, y: y))
-                        path.addLine(to: CGPoint(x: xOrigin + chartWidth, y: y))
-                    }
-                    .stroke(Color.white.opacity(0.1), style: StrokeStyle(lineWidth: 1, dash: [3, 3]))
-
-                    // Y axis label
-                    Text("\(level)")
-                        .font(.system(size: 10))
-                        .foregroundColor(.white.opacity(0.7))
-                        .position(x: 14, y: y)
-                }
-
-                // Line path
-                if data.count > 1 {
-                    let points = data.enumerated().map { (i, entry) -> CGPoint in
-                        let x = xOrigin + (CGFloat(i) / CGFloat(data.count - 1)) * chartWidth
-                        let y = yPadding + plotHeight * (1 - CGFloat(entry.uvIndex) / CGFloat(maxUV))
-                        return CGPoint(x: x, y: y)
-                    }
-
-                    // Filled area under curve
-                    Path { path in
-                        path.move(to: CGPoint(x: points[0].x, y: yPadding + plotHeight))
-                        for pt in points {
-                            path.addLine(to: pt)
-                        }
-                        path.addLine(to: CGPoint(x: points.last!.x, y: yPadding + plotHeight))
-                        path.closeSubpath()
-                    }
-                    .fill(Color(hex: "#FFD700").opacity(0.1))
-
-                    // Line
-                    Path { path in
-                        path.move(to: points[0])
-                        for pt in points.dropFirst() {
-                            path.addLine(to: pt)
+                HStack(spacing: 0) {
+                    // Fixed Y-axis
+                    ZStack {
+                        ForEach([0, 3, 6, 9, 11], id: \.self) { level in
+                            let y = yPadding + plotHeight * (1 - CGFloat(level) / CGFloat(maxUV))
+                            Text("\(level)")
+                                .font(.system(size: 9, weight: .medium, design: .rounded))
+                                .foregroundColor(.white.opacity(0.5))
+                                .position(x: yAxisWidth / 2, y: y)
                         }
                     }
-                    .stroke(Color(hex: "#FFD700"), lineWidth: 2)
+                    .frame(width: yAxisWidth, height: chartHeight)
 
-                    // Dots
-                    ForEach(Array(data.enumerated()), id: \.offset) { i, entry in
-                        let x = xOrigin + (CGFloat(i) / CGFloat(data.count - 1)) * chartWidth
-                        let y = yPadding + plotHeight * (1 - CGFloat(entry.uvIndex) / CGFloat(maxUV))
-
-                        let isNow = abs(entry.date.timeIntervalSince(Date())) < 1800
-                        let isSelected = selectedTime != nil && abs(entry.date.timeIntervalSince(selectedTime!)) < 1800
-
-                        Circle()
-                            .fill(isNow || isSelected ? Color.green : Color(hex: "#FFD700"))
-                            .frame(width: isNow || isSelected ? 12 : 8, height: isNow || isSelected ? 12 : 8)
-                            .position(x: x, y: y)
-                            .onTapGesture {
-                                onTimeSelect(entry.date)
+                    // Scrollable chart
+                    ScrollViewReader { proxy in
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            scrollableChartContent(
+                                data: data,
+                                maxUV: maxUV,
+                                totalWidth: totalWidth,
+                                pointSpacing: pointSpacing,
+                                edgePadding: edgePadding,
+                                yPadding: yPadding,
+                                plotHeight: plotHeight
+                            )
+                        }
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                scrollToNow(proxy: proxy, animated: false)
                             }
-                    }
-                }
-
-                // X axis labels
-                ForEach(Array(data.enumerated()), id: \.offset) { i, entry in
-                    if i % xLabelInterval(count: data.count) == 0 || i == data.count - 1 {
-                        let x = xOrigin + (CGFloat(i) / CGFloat(max(data.count - 1, 1))) * chartWidth
-
-                        Text(formatHour(entry.date))
-                            .font(.system(size: 9))
-                            .foregroundColor(.white.opacity(0.7))
-                            .position(x: x, y: chartHeight - 4)
+                        }
+                        .onChange(of: allSortedData.count) { _ in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                scrollToNow(proxy: proxy, animated: false)
+                            }
+                        }
                     }
                 }
             }
+            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
         .frame(height: chartHeight)
     }
 
-    // MARK: - Helpers
+    // MARK: - Scrollable Chart Content
 
-    private func xLabelInterval(count: Int) -> Int {
-        if count <= 6 { return 1 }
-        if count <= 12 { return 2 }
-        return 3
+    @ViewBuilder
+    private func scrollableChartContent(
+        data: [HourlyUVData],
+        maxUV: Double,
+        totalWidth: CGFloat,
+        pointSpacing: CGFloat,
+        edgePadding: CGFloat,
+        yPadding: CGFloat,
+        plotHeight: CGFloat
+    ) -> some View {
+        let points = data.enumerated().map { (i, entry) -> CGPoint in
+            let x = edgePadding + CGFloat(i) * pointSpacing
+            let y = yPadding + plotHeight * (1 - CGFloat(min(entry.uvIndex, maxUV)) / CGFloat(maxUV))
+            return CGPoint(x: x, y: y)
+        }
+
+        ZStack(alignment: .topLeading) {
+            // Horizontal grid lines
+            ForEach([0, 3, 6, 9, 11], id: \.self) { level in
+                let y = yPadding + plotHeight * (1 - CGFloat(level) / CGFloat(maxUV))
+                Path { path in
+                    path.move(to: CGPoint(x: 0, y: y))
+                    path.addLine(to: CGPoint(x: totalWidth, y: y))
+                }
+                .stroke(Color.white.opacity(0.06), lineWidth: 0.5)
+            }
+
+            if points.count > 1 {
+                // Gradient fill under smooth curve
+                catmullRomFillPath(points: points, baseline: yPadding + plotHeight)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Color(hex: "#FFD700").opacity(0.3),
+                                Color(hex: "#FFD700").opacity(0.02)
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+
+                // Smooth curve line
+                catmullRomPath(points: points)
+                    .stroke(
+                        LinearGradient(
+                            colors: [Color(hex: "#FFD700"), Color(hex: "#FFED4E")],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        ),
+                        lineWidth: 2.5
+                    )
+
+                // White vertical line + dot at current real time
+                ForEach(Array(data.enumerated()), id: \.offset) { i, entry in
+                    let isRealNow = abs(entry.date.timeIntervalSince(Date())) < 1800
+                    let isSelected = selectedTime != nil && abs(entry.date.timeIntervalSince(selectedTime!)) < 1800
+
+                    // Show white indicator at real time, but not if it's also the selected time (green will cover it)
+                    if isRealNow && !isSelected {
+                        Path { path in
+                            path.move(to: CGPoint(x: points[i].x, y: yPadding))
+                            path.addLine(to: CGPoint(x: points[i].x, y: yPadding + plotHeight))
+                        }
+                        .stroke(Color.white.opacity(0.35), lineWidth: 1)
+                    }
+                }
+
+                // Green vertical indicator line at selected position
+                ForEach(Array(data.enumerated()), id: \.offset) { i, entry in
+                    let isSelected = selectedTime != nil
+                        ? abs(entry.date.timeIntervalSince(selectedTime!)) < 1800
+                        : abs(entry.date.timeIntervalSince(Date())) < 1800
+
+                    if isSelected {
+                        Path { path in
+                            path.move(to: CGPoint(x: points[i].x, y: yPadding))
+                            path.addLine(to: CGPoint(x: points[i].x, y: yPadding + plotHeight))
+                        }
+                        .stroke(Color.green.opacity(0.4), lineWidth: 1.5)
+                    }
+                }
+
+                // Dots
+                ForEach(Array(data.enumerated()), id: \.offset) { i, entry in
+                    let isRealNow = abs(entry.date.timeIntervalSince(Date())) < 1800
+                    let isSelected = selectedTime != nil
+                        ? abs(entry.date.timeIntervalSince(selectedTime!)) < 1800
+                        : abs(entry.date.timeIntervalSince(Date())) < 1800
+
+                    ZStack {
+                        if isSelected {
+                            Circle()
+                                .fill(Color.green.opacity(0.2))
+                                .frame(width: 20, height: 20)
+                            Circle()
+                                .stroke(Color.green.opacity(0.5), lineWidth: 1)
+                                .frame(width: 14, height: 14)
+                        }
+                        Circle()
+                            .fill(isSelected ? Color.green
+                                  : isRealNow ? Color.white
+                                  : Color(hex: "#FFD700"))
+                            .frame(width: isSelected ? 9 : isRealNow ? 7 : 5,
+                                   height: isSelected ? 9 : isRealNow ? 7 : 5)
+                    }
+                    .position(x: points[i].x, y: points[i].y)
+                    .id(i)
+                }
+
+                // Invisible tap targets (full column width for easy tapping)
+                ForEach(Array(data.enumerated()), id: \.offset) { i, entry in
+                    Color.clear
+                        .frame(width: pointSpacing, height: plotHeight)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            onTimeSelect(entry.date)
+                        }
+                        .position(x: points[i].x, y: yPadding + plotHeight / 2)
+                }
+            }
+
+            // X-axis labels
+            if !points.isEmpty {
+                ForEach(Array(data.enumerated()), id: \.offset) { i, entry in
+                    if i % 2 == 0 || i == data.count - 1 {
+                        Text(formatHour(entry.date))
+                            .font(.system(size: 8, design: .rounded))
+                            .foregroundColor(.white.opacity(0.5))
+                            .position(x: points[i].x, y: chartHeight - 6)
+                    }
+                }
+            }
+        }
+        .frame(width: totalWidth, height: chartHeight)
     }
+
+    // MARK: - Catmull-Rom Spline
+
+    private func catmullRomPath(points: [CGPoint]) -> Path {
+        var path = Path()
+        guard points.count > 1 else { return path }
+        path.move(to: points[0])
+        for i in 0..<(points.count - 1) {
+            let p0 = i > 0 ? points[i - 1] : points[i]
+            let p1 = points[i]
+            let p2 = points[i + 1]
+            let p3 = i + 2 < points.count ? points[i + 2] : points[i + 1]
+            let cp1 = CGPoint(
+                x: p1.x + (p2.x - p0.x) / 6,
+                y: p1.y + (p2.y - p0.y) / 6
+            )
+            let cp2 = CGPoint(
+                x: p2.x - (p3.x - p1.x) / 6,
+                y: p2.y - (p3.y - p1.y) / 6
+            )
+            path.addCurve(to: p2, control1: cp1, control2: cp2)
+        }
+        return path
+    }
+
+    private func catmullRomFillPath(points: [CGPoint], baseline: CGFloat) -> Path {
+        var path = catmullRomPath(points: points)
+        if let last = points.last {
+            path.addLine(to: CGPoint(x: last.x, y: baseline))
+        }
+        path.addLine(to: CGPoint(x: points[0].x, y: baseline))
+        path.closeSubpath()
+        return path
+    }
+
+    // MARK: - Scroll
+
+    private func scrollToNow(proxy: ScrollViewProxy, animated: Bool) {
+        let data = allSortedData
+        guard !data.isEmpty else { return }
+        let nowIndex = data.firstIndex(where: { $0.date >= Date() }) ?? 0
+        // Offset back ~3 hours so "now" lands about 1/3 from the left edge
+        let targetIndex = max(0, nowIndex - 3)
+        if animated {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                proxy.scrollTo(targetIndex, anchor: .leading)
+            }
+        } else {
+            proxy.scrollTo(targetIndex, anchor: .leading)
+        }
+    }
+
+    // MARK: - Helpers
 
     private func formatHour(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "ha"
         let str = formatter.string(from: date)
-
-        // Add date suffix if not today
         let cal = Calendar.current
         if !cal.isDateInToday(date) {
             let dayFormatter = DateFormatter()
