@@ -1,4 +1,5 @@
 import Foundation
+import WidgetKit
 
 class UserPreferences: ObservableObject {
     private static let suiteName = "group.com.sunscreenfyi.shared"
@@ -6,29 +7,30 @@ class UserPreferences: ObservableObject {
     private let defaults: UserDefaults
 
     @Published var skinType: SkinType {
-        didSet { defaults.set(skinType.rawValue, forKey: "skinType") }
+        didSet { defaults.set(skinType.rawValue, forKey: "skinType"); reloadWidgets() }
     }
 
     @Published var durationMinutes: Double {
-        didSet { defaults.set(durationMinutes, forKey: "durationMinutes") }
+        didSet { defaults.set(durationMinutes, forKey: "durationMinutes"); reloadWidgets() }
     }
 
     @Published var cloudCover: CloudCover {
-        didSet { defaults.set(cloudCover.rawValue, forKey: "cloudCover") }
+        didSet { defaults.set(cloudCover.rawValue, forKey: "cloudCover"); reloadWidgets() }
     }
 
     @Published var surface: SurfaceType {
-        didSet { defaults.set(surface.rawValue, forKey: "surface") }
+        didSet { defaults.set(surface.rawValue, forKey: "surface"); reloadWidgets() }
     }
 
     @Published var elevationFeet: Double {
-        didSet { defaults.set(elevationFeet, forKey: "elevationFeet") }
+        didSet { defaults.set(elevationFeet, forKey: "elevationFeet"); reloadWidgets() }
     }
 
     @Published var otherFactors: Set<OtherFactor> {
         didSet {
             let rawValues = otherFactors.map { $0.rawValue }
             defaults.set(rawValues, forKey: "otherFactors")
+            reloadWidgets()
         }
     }
 
@@ -58,5 +60,9 @@ class UserPreferences: ObservableObject {
         self.otherFactors = Set(rawFactors.compactMap { OtherFactor(rawValue: $0) })
 
         self.hasCompletedQuiz = defaults.bool(forKey: "hasCompletedQuiz")
+    }
+
+    private func reloadWidgets() {
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }

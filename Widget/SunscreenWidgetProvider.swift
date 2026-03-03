@@ -74,20 +74,12 @@ struct SunscreenWidgetProvider: TimelineProvider {
                 let weather = try await weatherService.weather(for: location)
                 let uvIndex = Double(weather.currentWeather.uvIndex.value)
 
-                let cloudFraction = weather.currentWeather.cloudCover
-                let cloudCover: CloudCover
-                switch cloudFraction {
-                case 0..<0.25: cloudCover = .clear
-                case 0.25..<0.50: cloudCover = .scattered
-                case 0.50..<0.875: cloudCover = .broken
-                default: cloudCover = .overcast
-                }
-
+                // Use the user's saved preferences, not live weather data
                 let needs = SunscreenAlgorithm.needsSunscreen(
                     uvIndex: uvIndex,
                     skinType: preferences.skinType,
                     durationMinutes: preferences.durationMinutes,
-                    cloudCover: cloudCover,
+                    cloudCover: preferences.cloudCover,
                     surface: preferences.surface,
                     elevationFeet: preferences.elevationFeet,
                     otherFactors: preferences.otherFactors
@@ -96,7 +88,7 @@ struct SunscreenWidgetProvider: TimelineProvider {
                 let safeTime = SunscreenAlgorithm.safeExposureTime(
                     uvIndex: uvIndex,
                     skinType: preferences.skinType,
-                    cloudCover: cloudCover,
+                    cloudCover: preferences.cloudCover,
                     surface: preferences.surface,
                     elevationFeet: preferences.elevationFeet,
                     otherFactors: preferences.otherFactors
