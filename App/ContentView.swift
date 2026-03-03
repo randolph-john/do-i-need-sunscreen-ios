@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreLocation
 
 // MARK: - UV Background Colors (from utils.js)
 
@@ -33,6 +34,9 @@ struct ContentView: View {
 
     @State private var showQuiz = false
     @State private var showOtherFactors = false
+    @State private var showLocationChange = false
+    @State private var customLocation: CLLocation?
+    @State private var customLocationName: String?
 
     private var isDark: Bool {
         weatherService.uvIndex == 0
@@ -44,6 +48,18 @@ struct ContentView: View {
 
     private var textColor: Color {
         uvTextColor(uvIndex: weatherService.uvIndex, isDark: isDark)
+    }
+
+    private var activeLocation: CLLocation? {
+        customLocation ?? locationManager.location
+    }
+
+    private var activeLocationName: String? {
+        customLocationName ?? locationManager.locationName
+    }
+
+    private var isUsingCustomLocation: Bool {
+        customLocation != nil
     }
 
     var body: some View {
@@ -78,19 +94,30 @@ struct ContentView: View {
             locationManager.requestPermission()
         }
         .onChange(of: locationManager.location) { newLocation in
-            if let location = newLocation {
-                // Update elevation from GPS altitude (meters -> feet)
-                let altitudeMeters = location.altitude
-                if altitudeMeters >= 0 {
-                    preferences.elevationFeet = altitudeMeters * 3.28084
+            // Only use GPS location if not using a custom one
+            guard customLocation == nil, let location = newLocation else { return }
+            let altitudeMeters = location.altitude
+            if altitudeMeters >= 0 {
+                preferences.elevationFeet = altitudeMeters * 3.28084
+            }
+            Task {
+                await weatherService.fetchWeather(for: location)
+            }
+        }
+        .sheet(isPresented: $showQuiz) {
+            SkinTypeQuizView(isPresented: $showQuiz, preferences: preferences)
+        }
+        .sheet(isPresented: $showLocationChange) {
+            LocationChangeView(isPresented: $showLocationChange) { location, name, elevation in
+                customLocation = location
+                customLocationName = name
+                if let elevation = elevation {
+                    preferences.elevationFeet = elevation * 3.28084
                 }
                 Task {
                     await weatherService.fetchWeather(for: location)
                 }
             }
-        }
-        .sheet(isPresented: $showQuiz) {
-            SkinTypeQuizView(isPresented: $showQuiz, preferences: preferences)
         }
     }
 
@@ -213,11 +240,43 @@ struct ContentView: View {
                     .font(.system(size: 20, weight: .medium))
                     .foregroundColor(textColor)
 
-                if let name = locationManager.locationName {
-                    Text(name)
-                        .font(.system(size: 14))
-                        .foregroundColor(textColor.opacity(0.8))
-                        .italic()
+                if let name = activeLocationName {
+                    HStack(spacing: 4) {
+                        Text(name)
+                            .font(.system(size: 14))
+                            .foregroundColor(textColor.opacity(0.8))
+                            .italic()
+
+                        Text("(")
+                            .font(.system(size: 12))
+                            .foregroundColor(textColor.opacity(0.8))
+                        Button("change") {
+                            showLocationChange = true
+                        }
+                        .font(.system(size: 12).italic())
+                        .foregroundColor(Color(hex: "#4A90E2"))
+
+                        if isUsingCustomLocation {
+                            Text("|")
+                                .font(.system(size: 12))
+                                .foregroundColor(textColor.opacity(0.8))
+                            Button("reset") {
+                                customLocation = nil
+                                customLocationName = nil
+                                if let loc = locationManager.location {
+                                    let alt = loc.altitude
+                                    if alt >= 0 { preferences.elevationFeet = alt * 3.28084 }
+                                    Task { await weatherService.fetchWeather(for: loc) }
+                                }
+                            }
+                            .font(.system(size: 12).italic())
+                            .foregroundColor(Color(hex: "#4A90E2"))
+                        }
+
+                        Text(")")
+                            .font(.system(size: 12))
+                            .foregroundColor(textColor.opacity(0.8))
+                    }
                 }
 
                 Text("Elevation: \(Int(preferences.elevationFeet)) ft")
@@ -430,7 +489,7 @@ struct ContentView: View {
         let headline = "\(emoji) \(subject) \(verb) sunscreen right now!"
         let skin = "Skin: \(preferences.skinType.label) · UV: \(uvInt) · \(preferences.cloudCover.displayName)"
         var location = ""
-        if let name = locationManager.locationName {
+        if let name = activeLocationName {
             location = "📍 \(name) · \(Int(preferences.elevationFeet)) ft"
         }
 

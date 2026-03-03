@@ -22,6 +22,7 @@
 		C4B5B44AB3F6FD3FC2C65F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58DDD5CEC082117CC85085E9 /* Assets.xcassets */; };
 		DCCA5F2B98B6E3874939F76F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4AF0EF9C12C09BFF37791 /* LocationManager.swift */; };
 		EE7DF6B81086BF0C5173BC4E /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AA21514E80074EDF7A0F96 /* UserPreferences.swift */; };
+		EEE340A97D45B8B86C1B69BB /* LocationChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325B98B934285DBB98E8335 /* LocationChangeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		9A0DF0742B850C432DFC8D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A4D4AF0EF9C12C09BFF37791 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AD47B5A781F0159DC2E1B16B /* DoINeedSunscreen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DoINeedSunscreen.entitlements; sourceTree = "<group>"; };
+		B325B98B934285DBB98E8335 /* LocationChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationChangeView.swift; sourceTree = "<group>"; };
 		CC872A78D7644736A0EEAAB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoINeedSunscreenApp.swift; sourceTree = "<group>"; };
 		EDEF528C023F14B2C5C85BDC /* SunscreenWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidgetProvider.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */,
 				AD47B5A781F0159DC2E1B16B /* DoINeedSunscreen.entitlements */,
 				DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */,
+				B325B98B934285DBB98E8335 /* LocationChangeView.swift */,
 				A4D4AF0EF9C12C09BFF37791 /* LocationManager.swift */,
 				99BF979E177DA7566EB157C2 /* SkinTypeQuizView.swift */,
 				6B2BC4D3677A5D1F3975E1F8 /* WeatherService.swift */,
@@ -232,6 +235,7 @@
 			files = (
 				A2338A6547C626172F747EBD /* ContentView.swift in Sources */,
 				2B712E1A1E39201C0583567F /* DoINeedSunscreenApp.swift in Sources */,
+				EEE340A97D45B8B86C1B69BB /* LocationChangeView.swift in Sources */,
 				DCCA5F2B98B6E3874939F76F /* LocationManager.swift in Sources */,
 				5DE4FC50A98A1BD914BA7679 /* SkinTypeQuizView.swift in Sources */,
 				630D20B10900A16A5F732FA7 /* SunscreenAlgorithm.swift in Sources */,
