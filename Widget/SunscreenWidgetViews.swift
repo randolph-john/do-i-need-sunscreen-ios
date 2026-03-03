@@ -2,13 +2,15 @@ import SwiftUI
 import WidgetKit
 
 struct WidgetBackgroundModifier: ViewModifier {
+    let color: Color
+
     func body(content: Content) -> some View {
         if #available(iOSApplicationExtension 17.0, *) {
             content.containerBackground(for: .widget) {
-                Color(.systemBackground)
+                color
             }
         } else {
-            content.background(Color(.systemBackground))
+            content.background(color)
         }
     }
 }
@@ -62,28 +64,51 @@ struct SunscreenWidgetEntryView: View {
 
     // MARK: - System Small Widget
 
+    private var smallWidgetBgColor: Color {
+        let uv = Int(entry.uvIndex)
+        switch uv {
+        case 0: return Color(red: 0.2, green: 0.2, blue: 0.3)
+        case 1: return Color(red: 0.3, green: 0.7, blue: 0.3)
+        case 2: return Color(red: 0.3, green: 0.7, blue: 0.3)
+        case 3: return Color(red: 1.0, green: 0.84, blue: 0.0)
+        case 4: return Color(red: 1.0, green: 0.84, blue: 0.0)
+        case 5: return Color(red: 1.0, green: 0.84, blue: 0.0)
+        case 6: return Color(red: 1.0, green: 0.65, blue: 0.0)
+        case 7: return Color(red: 1.0, green: 0.55, blue: 0.0)
+        case 8: return Color(red: 1.0, green: 0.39, blue: 0.28)
+        case 9: return Color(red: 1.0, green: 0.27, blue: 0.0)
+        case 10: return Color(red: 0.86, green: 0.08, blue: 0.24)
+        default: return Color(red: 0.55, green: 0.0, blue: 0.0)
+        }
+    }
+
+    private var smallWidgetTextColor: Color {
+        entry.uvIndex <= 5 ? .black : .white
+    }
+
     private var smallView: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 6) {
             Image(systemName: entry.needsSunscreen
                   ? "sun.max.trianglebadge.exclamationmark"
                   : "sun.min")
-                .font(.system(size: 36))
-                .foregroundColor(entry.needsSunscreen ? .orange : .green)
+                .font(.system(size: 32))
+                .foregroundColor(smallWidgetTextColor)
 
-            Text(entry.needsSunscreen ? "Yes!" : "Nope")
-                .font(.headline)
+            Text(entry.needsSunscreen ? "YES" : "NO")
+                .font(.system(size: 28, weight: .bold))
+                .foregroundColor(smallWidgetTextColor)
 
             Text("UV \(Int(entry.uvIndex))")
-                .font(.caption)
-                .foregroundColor(.secondary)
+                .font(.system(size: 13))
+                .foregroundColor(smallWidgetTextColor.opacity(0.8))
 
-            if let safe = entry.safeExposureMinutes, !entry.needsSunscreen {
-                Text("Safe: \(SunscreenAlgorithm.formatDuration(minutes: safe))")
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
+            if entry.needsSunscreen, let safe = entry.safeExposureMinutes, safe > 0 {
+                Text("Apply in \(SunscreenAlgorithm.formatDuration(minutes: safe))")
+                    .font(.system(size: 11))
+                    .foregroundColor(smallWidgetTextColor.opacity(0.8))
             }
         }
-        .padding()
-        .modifier(WidgetBackgroundModifier())
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .modifier(WidgetBackgroundModifier(color: smallWidgetBgColor))
     }
 }

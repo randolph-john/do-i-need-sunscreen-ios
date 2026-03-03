@@ -21,6 +21,8 @@ struct SunscreenEntry: TimelineEntry {
 }
 
 struct SunscreenWidgetProvider: TimelineProvider {
+    let locationManager = CLLocationManager()
+
     func placeholder(in context: Context) -> SunscreenEntry {
         .placeholder
     }
@@ -44,7 +46,6 @@ struct SunscreenWidgetProvider: TimelineProvider {
     }
 
     private func fetchEntry(completion: @escaping (SunscreenEntry) -> Void) {
-        let locationManager = CLLocationManager()
         guard let location = locationManager.location else {
             completion(.placeholder)
             return
