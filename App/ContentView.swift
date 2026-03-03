@@ -39,6 +39,7 @@ struct ContentView: View {
     @State private var customLocation: CLLocation?
     @State private var customLocationName: String?
     @State private var selectedTime: Date?
+    @State private var showDoctorModal = false
 
     private var isDark: Bool {
         guard let location = activeLocation else {
@@ -112,6 +113,8 @@ struct ContentView: View {
                     uvInfoSection
                     controlsCard
                     featuresSection
+                    backedByDoctorsButton
+                    footerSection
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 40)
@@ -154,6 +157,9 @@ struct ContentView: View {
                 selectedTime = newTime
                 weatherService.selectTime(newTime)
             }
+        }
+        .sheet(isPresented: $showDoctorModal) {
+            DoctorBackedView(isPresented: $showDoctorModal)
         }
     }
 
@@ -654,6 +660,83 @@ struct ContentView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 16)
+    }
+
+    // MARK: - Backed by Doctors
+
+    private var backedByDoctorsButton: some View {
+        Button {
+            showDoctorModal = true
+        } label: {
+            Text("Backed by doctors")
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(textColor.opacity(0.7))
+                .padding(.vertical, 10)
+                .padding(.horizontal, 20)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(textColor.opacity(0.3), lineWidth: 1)
+                )
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.bottom, 24)
+    }
+
+    // MARK: - Footer
+
+    private var footerSection: some View {
+        VStack(spacing: 8) {
+            Rectangle()
+                .fill(textColor.opacity(0.15))
+                .frame(height: 1)
+
+            HStack(spacing: 0) {
+                Text("sunscreen.fyi \u{00A9} 2026")
+                    .font(.system(size: 12))
+                    .foregroundColor(textColor.opacity(0.5))
+
+                footerDot
+
+                Button {
+                    if let url = URL(string: "mailto:john_randolph@alumni.brown.edu?subject=Sunscreen%20App%20Feedback") {
+                        UIApplication.shared.open(url)
+                    }
+                } label: {
+                    Text("feedback")
+                        .font(.system(size: 12))
+                        .foregroundColor(textColor.opacity(0.5))
+                        .underline()
+                }
+
+                footerDot
+
+                Link(destination: URL(string: "https://x.com/sunscreenNYC")!) {
+                    Image(systemName: "link")
+                        .font(.system(size: 10))
+                        .foregroundColor(textColor.opacity(0.5))
+                    Text("X")
+                        .font(.system(size: 12))
+                        .foregroundColor(textColor.opacity(0.5))
+                        .underline()
+                }
+
+                footerDot
+
+                Link(destination: URL(string: "https://johngrandolph.com/html5up-forty/projects.html")!) {
+                    Text("my projects")
+                        .font(.system(size: 12))
+                        .foregroundColor(textColor.opacity(0.5))
+                        .underline()
+                }
+            }
+        }
+        .padding(.bottom, 10)
+    }
+
+    private var footerDot: some View {
+        Text(" \u{00B7} ")
+            .font(.system(size: 12))
+            .foregroundColor(textColor.opacity(0.5))
     }
 }
 

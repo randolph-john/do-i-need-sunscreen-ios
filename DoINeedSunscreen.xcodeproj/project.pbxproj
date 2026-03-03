@@ -10,6 +10,7 @@
 		19257AD2ACAE5FA2E0A8FF9F /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AA21514E80074EDF7A0F96 /* UserPreferences.swift */; };
 		1DDB21C3CE5EBD7DDC3D6CB3 /* TimeChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301F6A1A17853818A3082D7 /* TimeChangeView.swift */; };
 		2B712E1A1E39201C0583567F /* DoINeedSunscreenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */; };
+		2E349056FF16DF42E6995E87 /* DoctorBackedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0C9E95094CB09F3DC93DE0 /* DoctorBackedView.swift */; };
 		30A14AB79942B735CDE63188 /* SunscreenAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */; };
 		41702BDE7F7AED552058C3F8 /* SunscreenWidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B895C2D6B058F7F6685C6E /* SunscreenWidgetViews.swift */; };
 		41F665ECBE7EBFB25D31F7D2 /* SolarCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */; };
@@ -73,6 +74,7 @@
 		CC872A78D7644736A0EEAAB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarCalculator.swift; sourceTree = "<group>"; };
 		DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoINeedSunscreenApp.swift; sourceTree = "<group>"; };
+		DD0C9E95094CB09F3DC93DE0 /* DoctorBackedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorBackedView.swift; sourceTree = "<group>"; };
 		EDEF528C023F14B2C5C85BDC /* SunscreenWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidgetProvider.swift; sourceTree = "<group>"; };
 		F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DoINeedSunscreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -102,6 +104,7 @@
 			children = (
 				CC872A78D7644736A0EEAAB4 /* Assets.xcassets */,
 				37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */,
+				DD0C9E95094CB09F3DC93DE0 /* DoctorBackedView.swift */,
 				AD47B5A781F0159DC2E1B16B /* DoINeedSunscreen.entitlements */,
 				DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */,
 				B325B98B934285DBB98E8335 /* LocationChangeView.swift */,
@@ -246,6 +249,7 @@
 			files = (
 				A2338A6547C626172F747EBD /* ContentView.swift in Sources */,
 				2B712E1A1E39201C0583567F /* DoINeedSunscreenApp.swift in Sources */,
+				2E349056FF16DF42E6995E87 /* DoctorBackedView.swift in Sources */,
 				EEE340A97D45B8B86C1B69BB /* LocationChangeView.swift in Sources */,
 				DCCA5F2B98B6E3874939F76F /* LocationManager.swift in Sources */,
 				5DE4FC50A98A1BD914BA7679 /* SkinTypeQuizView.swift in Sources */,
