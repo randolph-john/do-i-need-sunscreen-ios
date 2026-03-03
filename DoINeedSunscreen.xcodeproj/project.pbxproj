@@ -8,14 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		19257AD2ACAE5FA2E0A8FF9F /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AA21514E80074EDF7A0F96 /* UserPreferences.swift */; };
+		1DDB21C3CE5EBD7DDC3D6CB3 /* TimeChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301F6A1A17853818A3082D7 /* TimeChangeView.swift */; };
 		2B712E1A1E39201C0583567F /* DoINeedSunscreenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */; };
 		30A14AB79942B735CDE63188 /* SunscreenAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */; };
 		41702BDE7F7AED552058C3F8 /* SunscreenWidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B895C2D6B058F7F6685C6E /* SunscreenWidgetViews.swift */; };
+		41F665ECBE7EBFB25D31F7D2 /* SolarCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */; };
 		4D71419EF83B632C926DB20F /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2BC4D3677A5D1F3975E1F8 /* WeatherService.swift */; };
 		5C7A0124341539CF22FDA2AC /* SunscreenWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5DE4FC50A98A1BD914BA7679 /* SkinTypeQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BF979E177DA7566EB157C2 /* SkinTypeQuizView.swift */; };
 		630D20B10900A16A5F732FA7 /* SunscreenAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */; };
 		7291A1C3269BCF03B85EEF52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC872A78D7644736A0EEAAB4 /* Assets.xcassets */; };
+		95497A43CFC5226F0B6F3162 /* SolarCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */; };
 		A1904549F9CFA35B347C054C /* SunscreenWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC51B1C30242C63CD56DE82 /* SunscreenWidget.swift */; };
 		A2338A6547C626172F747EBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */; };
 		A9978BD38A2F14107835E8A9 /* SunscreenWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEF528C023F14B2C5C85BDC /* SunscreenWidgetProvider.swift */; };
@@ -55,6 +58,7 @@
 		1B3E1F7E82A68D7E4A1930C6 /* SunscreenWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunscreenWidgetExtension.entitlements; sourceTree = "<group>"; };
 		30B895C2D6B058F7F6685C6E /* SunscreenWidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidgetViews.swift; sourceTree = "<group>"; };
 		31AA21514E80074EDF7A0F96 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		3301F6A1A17853818A3082D7 /* TimeChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeChangeView.swift; sourceTree = "<group>"; };
 		37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		58DDD5CEC082117CC85085E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AC51B1C30242C63CD56DE82 /* SunscreenWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidget.swift; sourceTree = "<group>"; };
@@ -65,6 +69,7 @@
 		AD47B5A781F0159DC2E1B16B /* DoINeedSunscreen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DoINeedSunscreen.entitlements; sourceTree = "<group>"; };
 		B325B98B934285DBB98E8335 /* LocationChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationChangeView.swift; sourceTree = "<group>"; };
 		CC872A78D7644736A0EEAAB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarCalculator.swift; sourceTree = "<group>"; };
 		DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoINeedSunscreenApp.swift; sourceTree = "<group>"; };
 		EDEF528C023F14B2C5C85BDC /* SunscreenWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidgetProvider.swift; sourceTree = "<group>"; };
 		F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DoINeedSunscreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +88,7 @@
 		33BCC5FB69A5935EEB6D6FD6 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */,
 				0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */,
 				31AA21514E80074EDF7A0F96 /* UserPreferences.swift */,
 			);
@@ -99,6 +105,7 @@
 				B325B98B934285DBB98E8335 /* LocationChangeView.swift */,
 				A4D4AF0EF9C12C09BFF37791 /* LocationManager.swift */,
 				99BF979E177DA7566EB157C2 /* SkinTypeQuizView.swift */,
+				3301F6A1A17853818A3082D7 /* TimeChangeView.swift */,
 				6B2BC4D3677A5D1F3975E1F8 /* WeatherService.swift */,
 			);
 			path = App;
@@ -221,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41F665ECBE7EBFB25D31F7D2 /* SolarCalculator.swift in Sources */,
 				30A14AB79942B735CDE63188 /* SunscreenAlgorithm.swift in Sources */,
 				A1904549F9CFA35B347C054C /* SunscreenWidget.swift in Sources */,
 				A9978BD38A2F14107835E8A9 /* SunscreenWidgetProvider.swift in Sources */,
@@ -238,7 +246,9 @@
 				EEE340A97D45B8B86C1B69BB /* LocationChangeView.swift in Sources */,
 				DCCA5F2B98B6E3874939F76F /* LocationManager.swift in Sources */,
 				5DE4FC50A98A1BD914BA7679 /* SkinTypeQuizView.swift in Sources */,
+				95497A43CFC5226F0B6F3162 /* SolarCalculator.swift in Sources */,
 				630D20B10900A16A5F732FA7 /* SunscreenAlgorithm.swift in Sources */,
+				1DDB21C3CE5EBD7DDC3D6CB3 /* TimeChangeView.swift in Sources */,
 				EE7DF6B81086BF0C5173BC4E /* UserPreferences.swift in Sources */,
 				4D71419EF83B632C926DB20F /* WeatherService.swift in Sources */,
 			);

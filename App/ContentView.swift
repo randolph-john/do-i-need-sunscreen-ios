@@ -35,11 +35,16 @@ struct ContentView: View {
     @State private var showQuiz = false
     @State private var showOtherFactors = false
     @State private var showLocationChange = false
+    @State private var showTimePicker = false
     @State private var customLocation: CLLocation?
     @State private var customLocationName: String?
+    @State private var selectedTime: Date?
 
     private var isDark: Bool {
-        weatherService.uvIndex == 0
+        guard let location = activeLocation else {
+            return weatherService.uvIndex == 0
+        }
+        return !SolarCalculator.isDaylight(at: displayTime, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
     }
 
     private var bgColor: Color {
@@ -60,6 +65,20 @@ struct ContentView: View {
 
     private var isUsingCustomLocation: Bool {
         customLocation != nil
+    }
+
+    private var isUsingCustomTime: Bool {
+        selectedTime != nil
+    }
+
+    private var displayTime: Date {
+        selectedTime ?? Date()
+    }
+
+    private var formattedTime: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE, MMM d, h:mm a"
+        return formatter.string(from: displayTime)
     }
 
     private var skinTypeBinding: Binding<Double> {
@@ -128,6 +147,12 @@ struct ContentView: View {
                 Task {
                     await weatherService.fetchWeather(for: location)
                 }
+            }
+        }
+        .sheet(isPresented: $showTimePicker) {
+            TimeChangeView(isPresented: $showTimePicker, currentTime: displayTime) { newTime in
+                selectedTime = newTime
+                weatherService.selectTime(newTime)
             }
         }
     }
@@ -294,6 +319,39 @@ struct ContentView: View {
                     .font(.system(size: 14))
                     .foregroundColor(textColor.opacity(0.8))
                     .italic()
+
+                // Time row
+                HStack(spacing: 4) {
+                    Text(formattedTime)
+                        .font(.system(size: 14))
+                        .foregroundColor(textColor.opacity(0.8))
+                        .italic()
+
+                    Text("(")
+                        .font(.system(size: 12))
+                        .foregroundColor(textColor.opacity(0.8))
+                    Button("change") {
+                        showTimePicker = true
+                    }
+                    .font(.system(size: 12).italic())
+                    .foregroundColor(Color(hex: "#4A90E2"))
+
+                    if isUsingCustomTime {
+                        Text("|")
+                            .font(.system(size: 12))
+                            .foregroundColor(textColor.opacity(0.8))
+                        Button("reset") {
+                            selectedTime = nil
+                            weatherService.selectTime(nil)
+                        }
+                        .font(.system(size: 12).italic())
+                        .foregroundColor(Color(hex: "#4A90E2"))
+                    }
+
+                    Text(")")
+                        .font(.system(size: 12))
+                        .foregroundColor(textColor.opacity(0.8))
+                }
 
                 if let error = weatherService.errorMessage {
                     Text(error)
