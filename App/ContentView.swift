@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreLocation
+import Combine
 import WidgetKit
 
 // MARK: - UV Background Colors (from utils.js)
@@ -32,6 +33,7 @@ struct ContentView: View {
     @StateObject private var locationManager = LocationManager()
     @StateObject private var weatherService = WeatherService()
     @StateObject private var preferences = UserPreferences()
+    @Environment(\.scenePhase) private var scenePhase
 
     @State private var showQuiz = false
     @State private var showOtherFactors = false
@@ -137,6 +139,24 @@ struct ContentView: View {
                 preferences.elevationFeet = altitudeMeters * 3.28084
             }
             saveLocationForWidget(location)
+            Task {
+                await weatherService.fetchWeather(for: location)
+            }
+        }
+        .onChange(of: scenePhase) { newPhase in
+            guard newPhase == .active, let location = activeLocation else { return }
+            // Reset to current time and re-fetch weather on foreground return
+            if selectedTime != nil {
+                selectedTime = nil
+                weatherService.selectTime(nil)
+            }
+            Task {
+                await weatherService.fetchWeather(for: location)
+            }
+        }
+        .onReceive(Timer.publish(every: 600, on: .main, in: .common).autoconnect()) { _ in
+            // Refresh weather every 10 minutes while in foreground
+            guard let location = activeLocation else { return }
             Task {
                 await weatherService.fetchWeather(for: location)
             }

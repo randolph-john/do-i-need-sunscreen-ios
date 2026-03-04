@@ -74,15 +74,13 @@ struct UVGraphView: View {
                                 plotHeight: plotHeight
                             )
                         }
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                scrollToNow(proxy: proxy, animated: false)
-                            }
-                        }
-                        .onChange(of: allSortedData.count) { _ in
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                scrollToNow(proxy: proxy, animated: false)
-                            }
+                        .task {
+                            // First attempt after layout settles
+                            try? await Task.sleep(nanoseconds: 150_000_000)
+                            scrollToNow(proxy: proxy, animated: false)
+                            // Retry for slower layout scenarios (e.g. cold launch)
+                            try? await Task.sleep(nanoseconds: 400_000_000)
+                            scrollToNow(proxy: proxy, animated: false)
                         }
                     }
                 }
@@ -286,7 +284,12 @@ struct UVGraphView: View {
                 proxy.scrollTo(targetIndex, anchor: .leading)
             }
         } else {
-            proxy.scrollTo(targetIndex, anchor: .leading)
+            // Zero-duration animation is more reliable than bare scrollTo
+            // on initial appear, when the scroll view content may not be
+            // fully measured yet.
+            withAnimation(.linear(duration: 0)) {
+                proxy.scrollTo(targetIndex, anchor: .leading)
+            }
         }
     }
 
