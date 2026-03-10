@@ -5,12 +5,8 @@ struct WidgetBackgroundModifier: ViewModifier {
     let color: Color
 
     func body(content: Content) -> some View {
-        if #available(iOSApplicationExtension 17.0, *) {
-            content.containerBackground(for: .widget) {
-                color
-            }
-        } else {
-            content.background(color)
+        content.containerBackground(for: .widget) {
+            color
         }
     }
 }
@@ -86,6 +82,13 @@ struct SunscreenWidgetEntryView: View {
         entry.uvIndex <= 5 ? .black : .white
     }
 
+    private var modeLabel: String {
+        if let label = entry.scheduledTimeLabel {
+            return label
+        }
+        return "Now"
+    }
+
     private var smallView: some View {
         VStack(spacing: 6) {
             Image(systemName: entry.needsSunscreen
@@ -107,6 +110,10 @@ struct SunscreenWidgetEntryView: View {
                     .font(.system(size: 11))
                     .foregroundColor(smallWidgetTextColor.opacity(0.8))
             }
+
+            Text(modeLabel)
+                .font(.system(size: 10, weight: .medium))
+                .foregroundColor(smallWidgetTextColor.opacity(0.6))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .modifier(WidgetBackgroundModifier(color: smallWidgetBgColor))

@@ -39,11 +39,14 @@ struct ContentView: View {
     @State private var showOtherFactors = false
     @State private var showLocationChange = false
     @State private var showTimePicker = false
+    @State private var showNotificationSettings = false
     @State private var customLocation: CLLocation?
     @State private var customLocationName: String?
     @State private var customTimeZone: TimeZone?
     @State private var selectedTime: Date?
     @State private var showDoctorModal = false
+
+    @StateObject private var notificationManager = NotificationManager.shared
 
     private var isDark: Bool {
         guard let location = activeLocation else {
@@ -153,6 +156,8 @@ struct ContentView: View {
             Task {
                 await weatherService.fetchWeather(for: location)
             }
+            notificationManager.refreshPermissionStatus()
+            notificationManager.scheduleNotifications()
         }
         .onReceive(Timer.publish(every: 600, on: .main, in: .common).autoconnect()) { _ in
             // Refresh weather every 10 minutes while in foreground
@@ -186,6 +191,9 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showDoctorModal) {
             DoctorBackedView(isPresented: $showDoctorModal)
+        }
+        .sheet(isPresented: $showNotificationSettings) {
+            NotificationSettingsView(isPresented: $showNotificationSettings, preferences: preferences, notificationManager: notificationManager)
         }
     }
 
@@ -617,6 +625,21 @@ struct ContentView: View {
 
     private var featuresSection: some View {
         VStack(spacing: 0) {
+            // Daily Notifications
+            featureRow(title: "Daily notifications") {
+                Button {
+                    showNotificationSettings = true
+                } label: {
+                    goldButtonLabel(preferences.notificationsEnabled ? "Enabled" : "Enable")
+                }
+            }
+
+            // Divider
+            Rectangle()
+                .fill(textColor.opacity(0.15))
+                .frame(height: 1)
+                .padding(.horizontal)
+
             // Skin Type Quiz
             featureRow(title: "What skin type am I?") {
                 Button {

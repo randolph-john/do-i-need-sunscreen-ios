@@ -44,6 +44,11 @@ struct UVGraphView: View {
             let xLabelHeight: CGFloat = 16
             let plotHeight = chartHeight - yPadding - xLabelHeight
 
+            // Calculate the initial scroll offset in points
+            let nowIndex = data.firstIndex(where: { $0.date >= Date() }) ?? 0
+            let targetIndex = max(0, nowIndex - 3)
+            let initialOffset = edgePadding + CGFloat(targetIndex) * pointSpacing - edgePadding
+
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color.black.opacity(0.2))
@@ -62,26 +67,19 @@ struct UVGraphView: View {
                     .frame(width: yAxisWidth, height: chartHeight)
 
                     // Scrollable chart
-                    ScrollViewReader { proxy in
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            scrollableChartContent(
-                                data: data,
-                                maxUV: maxUV,
-                                totalWidth: totalWidth,
-                                pointSpacing: pointSpacing,
-                                edgePadding: edgePadding,
-                                yPadding: yPadding,
-                                plotHeight: plotHeight
-                            )
-                        }
-                        .task {
-                            // First attempt after layout settles
-                            try? await Task.sleep(nanoseconds: 150_000_000)
-                            scrollToNow(proxy: proxy, animated: false)
-                            // Retry for slower layout scenarios (e.g. cold launch)
-                            try? await Task.sleep(nanoseconds: 400_000_000)
-                            scrollToNow(proxy: proxy, animated: false)
-                        }
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        scrollableChartContent(
+                            data: data,
+                            maxUV: maxUV,
+                            totalWidth: totalWidth,
+                            pointSpacing: pointSpacing,
+                            edgePadding: edgePadding,
+                            yPadding: yPadding,
+                            plotHeight: plotHeight
+                        )
+                        .background(
+                            ScrollViewInitialOffset(offset: initialOffset)
+                        )
                     }
                 }
             }
@@ -109,16 +107,6 @@ struct UVGraphView: View {
         }
 
         ZStack(alignment: .topLeading) {
-            // Layout-based scroll anchors (invisible, for ScrollViewReader)
-            HStack(spacing: 0) {
-                ForEach(0..<data.count, id: \.self) { i in
-                    Color.clear
-                        .frame(width: pointSpacing, height: 1)
-                        .id(i)
-                }
-            }
-            .padding(.leading, edgePadding - pointSpacing / 2)
-
             // Horizontal grid lines
             ForEach([0, 3, 6, 9, 11], id: \.self) { level in
                 let y = yPadding + plotHeight * (1 - CGFloat(level) / CGFloat(maxUV))
@@ -271,28 +259,6 @@ struct UVGraphView: View {
         return path
     }
 
-    // MARK: - Scroll
-
-    private func scrollToNow(proxy: ScrollViewProxy, animated: Bool) {
-        let data = allSortedData
-        guard !data.isEmpty else { return }
-        let nowIndex = data.firstIndex(where: { $0.date >= Date() }) ?? 0
-        // Offset back ~3 hours so "now" lands about 1/3 from the left edge
-        let targetIndex = max(0, nowIndex - 3)
-        if animated {
-            withAnimation(.easeInOut(duration: 0.3)) {
-                proxy.scrollTo(targetIndex, anchor: .leading)
-            }
-        } else {
-            // Zero-duration animation is more reliable than bare scrollTo
-            // on initial appear, when the scroll view content may not be
-            // fully measured yet.
-            withAnimation(.linear(duration: 0)) {
-                proxy.scrollTo(targetIndex, anchor: .leading)
-            }
-        }
-    }
-
     // MARK: - Helpers
 
     private func formatHour(_ date: Date) -> String {
@@ -306,5 +272,43 @@ struct UVGraphView: View {
             return str + "\n" + dayFormatter.string(from: date)
         }
         return str
+    }
+}
+
+// MARK: - UIKit ScrollView Introspection
+
+/// Sets the initial content offset of the nearest parent UIScrollView.
+/// This bypasses SwiftUI's unreliable ScrollViewReader/scrollPosition APIs
+/// by directly setting UIScrollView.contentOffset via UIKit.
+private struct ScrollViewInitialOffset: UIViewRepresentable {
+    let offset: CGFloat
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView(frame: .zero)
+        view.isHidden = true
+        view.isUserInteractionEnabled = false
+        // Use the next layout cycle so the scroll view's content size is finalized
+        DispatchQueue.main.async {
+            if let scrollView = Self.findScrollView(from: view) {
+                scrollView.setContentOffset(
+                    CGPoint(x: max(0, offset), y: 0),
+                    animated: false
+                )
+            }
+        }
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {}
+
+    private static func findScrollView(from view: UIView) -> UIScrollView? {
+        var current: UIView? = view
+        while let parent = current?.superview {
+            if let scrollView = parent as? UIScrollView {
+                return scrollView
+            }
+            current = parent
+        }
+        return nil
     }
 }

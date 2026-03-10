@@ -2,7 +2,7 @@ name: DoINeedSunscreen
 options:
   bundleIdPrefix: com.sunscreenfyi
   deploymentTarget:
-    iOS: "16.0"
+    iOS: "17.0"
   xcodeVersion: "15.0"
 
 settings:
@@ -12,7 +12,7 @@ settings:
 targets:
   DoINeedSunscreen:
     type: application
-    platform: iOS
+    supportedDestinations: [iOS]
     sources:
       - path: App
       - path: Shared
@@ -29,6 +29,8 @@ targets:
         INFOPLIST_KEY_UILaunchScreen_Generation: true
         INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        INFOPLIST_KEY_BGTaskSchedulerPermittedIdentifiers: "com.sunscreenfyi.DoINeedSunscreen.refreshNotification"
+        INFOPLIST_KEY_UIBackgroundModes: "fetch"
     entitlements:
       path: App/DoINeedSunscreen.entitlements
       properties:
@@ -40,7 +42,7 @@ targets:
 
   SunscreenWidgetExtension:
     type: app-extension
-    platform: iOS
+    supportedDestinations: [iOS]
     sources:
       - path: Widget
       - path: Shared
