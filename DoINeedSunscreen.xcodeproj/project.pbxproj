@@ -7,30 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C82C6C83F84D83D28E100AD /* UVColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E975D6D3D3D1BBCD2551DE0 /* UVColors.swift */; };
+		1763DF2E04380F98CA487D2B /* WatchWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC672778E94F90198F10744F /* WatchWidget.swift */; };
 		19257AD2ACAE5FA2E0A8FF9F /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AA21514E80074EDF7A0F96 /* UserPreferences.swift */; };
 		1DDB21C3CE5EBD7DDC3D6CB3 /* TimeChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3301F6A1A17853818A3082D7 /* TimeChangeView.swift */; };
+		2A6D74D2630AA84A07A97D54 /* SolarCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */; };
 		2B712E1A1E39201C0583567F /* DoINeedSunscreenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */; };
+		2C215DE6A52B6E90491F3AA5 /* SunscreenAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */; };
 		2E349056FF16DF42E6995E87 /* DoctorBackedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0C9E95094CB09F3DC93DE0 /* DoctorBackedView.swift */; };
 		30A14AB79942B735CDE63188 /* SunscreenAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */; };
 		41702BDE7F7AED552058C3F8 /* SunscreenWidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B895C2D6B058F7F6685C6E /* SunscreenWidgetViews.swift */; };
 		41F665ECBE7EBFB25D31F7D2 /* SolarCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */; };
+		4A32E1A5A907CD7F9E1F1C1A /* WatchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4163CBA80143BBCE340240B /* WatchContentView.swift */; };
 		4D71419EF83B632C926DB20F /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2BC4D3677A5D1F3975E1F8 /* WeatherService.swift */; };
+		4FC7241EB9384A33B84FD11B /* SunscreenAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */; };
 		535949393EF06C826810D33F /* SunscreenAppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F9DE13678337E6095817DD /* SunscreenAppIntent.swift */; };
 		5C7A0124341539CF22FDA2AC /* SunscreenWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5DE4FC50A98A1BD914BA7679 /* SkinTypeQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BF979E177DA7566EB157C2 /* SkinTypeQuizView.swift */; };
+		5FFFC263D1D6D4FBE609608C /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AA21514E80074EDF7A0F96 /* UserPreferences.swift */; };
 		630D20B10900A16A5F732FA7 /* SunscreenAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */; };
+		6E40132D88C417331545EDE5 /* WatchWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B156598E41A55BBEA74E60 /* WatchWidgetProvider.swift */; };
 		7291A1C3269BCF03B85EEF52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC872A78D7644736A0EEAAB4 /* Assets.xcassets */; };
+		7C4604120CA43847C6B271A0 /* UVColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E975D6D3D3D1BBCD2551DE0 /* UVColors.swift */; };
+		86E78297EA7E70047FCE9523 /* WatchWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19779A2BC8BA4D4FFD3052A8 /* WatchWeatherService.swift */; };
+		87C7DEBE0AB1BB5EF1EF6CC1 /* SolarCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */; };
+		8D92964C9E6C4C0A50F23A33 /* UVColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E975D6D3D3D1BBCD2551DE0 /* UVColors.swift */; };
+		94D5562841F774CDE9D8F7E6 /* WatchWidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = E347F9811EAFE869A20CE318 /* WatchWidgetViews.swift */; };
 		95497A43CFC5226F0B6F3162 /* SolarCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */; };
 		95B8519720B148FF8475A7F3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F2BB8703CA75DA9E8DD2E /* NotificationManager.swift */; };
+		974F74DC9794AA476E23C22B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05A2A35947265B462A062642 /* Assets.xcassets */; };
 		A1904549F9CFA35B347C054C /* SunscreenWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC51B1C30242C63CD56DE82 /* SunscreenWidget.swift */; };
 		A2338A6547C626172F747EBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */; };
+		A3E3A028E94D208ADC942E7C /* SunscreenWatchWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0BE5DCB515AAAF61FFE292C3 /* SunscreenWatchWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BC956FC1066725D6107CAE1D /* WatchLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3369FD5B399BE49BA5F6B5 /* WatchLocationManager.swift */; };
 		C4B5B44AB3F6FD3FC2C65F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58DDD5CEC082117CC85085E9 /* Assets.xcassets */; };
 		C52AB8DBC13FAD655F446BE7 /* UVGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133D74B9542BD568BC18E17F /* UVGraphView.swift */; };
 		D5F0860D8F7BBF63913EB986 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CD1CFE565F86656F2E06E /* NotificationSettingsView.swift */; };
+		D71723DDB64E8EE91B1C5BDB /* UVColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E975D6D3D3D1BBCD2551DE0 /* UVColors.swift */; };
 		DCCA5F2B98B6E3874939F76F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4AF0EF9C12C09BFF37791 /* LocationManager.swift */; };
+		DE559C62A87572D771E0B395 /* SunscreenWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D52846E23EA6412345891F4 /* SunscreenWatchApp.swift */; };
 		DFDE129B02CA7A720CDB66E0 /* SunscreenConfigurableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85A83CD4733E935DDC4F61E /* SunscreenConfigurableProvider.swift */; };
 		EE7DF6B81086BF0C5173BC4E /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AA21514E80074EDF7A0F96 /* UserPreferences.swift */; };
 		EEE340A97D45B8B86C1B69BB /* LocationChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325B98B934285DBB98E8335 /* LocationChangeView.swift */; };
+		FE089B600814F0706995FC2B /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AA21514E80074EDF7A0F96 /* UserPreferences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +59,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 4BD73F9D2B2C89B3B25CF73F;
 			remoteInfo = SunscreenWidgetExtension;
+		};
+		A9AC362629651B5429CC3925 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE2C7F2A080C799A977B852A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3B97E437BA860A2C7CDDE291;
+			remoteInfo = SunscreenWatchWidget;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -55,44 +81,95 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B08F22013C8FA407AD12B56 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A3E3A028E94D208ADC942E7C /* SunscreenWatchWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		017BD8BBA7BE593D6E2E8458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		05A2A35947265B462A062642 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenAlgorithm.swift; sourceTree = "<group>"; };
+		0BE5DCB515AAAF61FFE292C3 /* SunscreenWatchWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunscreenWatchWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E975D6D3D3D1BBCD2551DE0 /* UVColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVColors.swift; sourceTree = "<group>"; };
 		130CD1CFE565F86656F2E06E /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		133D74B9542BD568BC18E17F /* UVGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVGraphView.swift; sourceTree = "<group>"; };
-		196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunscreenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		15B156598E41A55BBEA74E60 /* WatchWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWidgetProvider.swift; sourceTree = "<group>"; };
+		196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = SunscreenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		19779A2BC8BA4D4FFD3052A8 /* WatchWeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWeatherService.swift; sourceTree = "<group>"; };
 		1B3E1F7E82A68D7E4A1930C6 /* SunscreenWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunscreenWidgetExtension.entitlements; sourceTree = "<group>"; };
 		1F3F2BB8703CA75DA9E8DD2E /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		30B895C2D6B058F7F6685C6E /* SunscreenWidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidgetViews.swift; sourceTree = "<group>"; };
 		31AA21514E80074EDF7A0F96 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		3301F6A1A17853818A3082D7 /* TimeChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeChangeView.swift; sourceTree = "<group>"; };
+		345C92B9E507A86FE0C89E87 /* SunscreenWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SunscreenWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		58DDD5CEC082117CC85085E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5D52846E23EA6412345891F4 /* SunscreenWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWatchApp.swift; sourceTree = "<group>"; };
 		6AC51B1C30242C63CD56DE82 /* SunscreenWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidget.swift; sourceTree = "<group>"; };
 		6B2BC4D3677A5D1F3975E1F8 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		70F9DE13678337E6095817DD /* SunscreenAppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenAppIntent.swift; sourceTree = "<group>"; };
+		76DF782EBDEFCA71C931DD9C /* SunscreenWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunscreenWatch.entitlements; sourceTree = "<group>"; };
 		99BF979E177DA7566EB157C2 /* SkinTypeQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinTypeQuizView.swift; sourceTree = "<group>"; };
 		9A0DF0742B850C432DFC8D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A4D4AF0EF9C12C09BFF37791 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		AB3369FD5B399BE49BA5F6B5 /* WatchLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLocationManager.swift; sourceTree = "<group>"; };
 		AD47B5A781F0159DC2E1B16B /* DoINeedSunscreen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DoINeedSunscreen.entitlements; sourceTree = "<group>"; };
 		B325B98B934285DBB98E8335 /* LocationChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationChangeView.swift; sourceTree = "<group>"; };
 		CC872A78D7644736A0EEAAB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D4163CBA80143BBCE340240B /* WatchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentView.swift; sourceTree = "<group>"; };
 		D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarCalculator.swift; sourceTree = "<group>"; };
 		DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoINeedSunscreenApp.swift; sourceTree = "<group>"; };
+		DC672778E94F90198F10744F /* WatchWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWidget.swift; sourceTree = "<group>"; };
 		DD0C9E95094CB09F3DC93DE0 /* DoctorBackedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorBackedView.swift; sourceTree = "<group>"; };
+		E347F9811EAFE869A20CE318 /* WatchWidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWidgetViews.swift; sourceTree = "<group>"; };
 		E85A83CD4733E935DDC4F61E /* SunscreenConfigurableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenConfigurableProvider.swift; sourceTree = "<group>"; };
-		F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoINeedSunscreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DoINeedSunscreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		0581917470D13C0E0A41EE0C /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				017BD8BBA7BE593D6E2E8458 /* Info.plist */,
+				DC672778E94F90198F10744F /* WatchWidget.swift */,
+				15B156598E41A55BBEA74E60 /* WatchWidgetProvider.swift */,
+				E347F9811EAFE869A20CE318 /* WatchWidgetViews.swift */,
+			);
+			name = Widget;
+			path = Watch/Widget;
+			sourceTree = "<group>";
+		};
 		0FB12BB51067D56D9F0141BF /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */,
+				345C92B9E507A86FE0C89E87 /* SunscreenWatch.app */,
+				0BE5DCB515AAAF61FFE292C3 /* SunscreenWatchWidget.appex */,
 				196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1ADBF457E6FD229132D02A9B /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				05A2A35947265B462A062642 /* Assets.xcassets */,
+				76DF782EBDEFCA71C931DD9C /* SunscreenWatch.entitlements */,
+				5D52846E23EA6412345891F4 /* SunscreenWatchApp.swift */,
+				D4163CBA80143BBCE340240B /* WatchContentView.swift */,
+				AB3369FD5B399BE49BA5F6B5 /* WatchLocationManager.swift */,
+				19779A2BC8BA4D4FFD3052A8 /* WatchWeatherService.swift */,
+			);
+			path = Watch;
 			sourceTree = "<group>";
 		};
 		33BCC5FB69A5935EEB6D6FD6 /* Shared */ = {
@@ -101,6 +178,7 @@
 				D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */,
 				0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */,
 				31AA21514E80074EDF7A0F96 /* UserPreferences.swift */,
+				0E975D6D3D3D1BBCD2551DE0 /* UVColors.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -144,7 +222,9 @@
 			children = (
 				5C25E6A4A2D1A508C6624585 /* App */,
 				33BCC5FB69A5935EEB6D6FD6 /* Shared */,
+				1ADBF457E6FD229132D02A9B /* Watch */,
 				63CEEC9C7A41753871AAD23F /* Widget */,
+				0581917470D13C0E0A41EE0C /* Widget */,
 				0FB12BB51067D56D9F0141BF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -152,6 +232,43 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		243642134747611550701E53 /* SunscreenWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 771C9C8303CA066DACC84AD7 /* Build configuration list for PBXNativeTarget "SunscreenWatch" */;
+			buildPhases = (
+				D38E8A07F0C6B965E71D98C3 /* Sources */,
+				43DAE03E57FAF46B67ADB2C1 /* Resources */,
+				9B08F22013C8FA407AD12B56 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D66AFCFF24B75499B6816BCF /* PBXTargetDependency */,
+			);
+			name = SunscreenWatch;
+			packageProductDependencies = (
+			);
+			productName = SunscreenWatch;
+			productReference = 345C92B9E507A86FE0C89E87 /* SunscreenWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3B97E437BA860A2C7CDDE291 /* SunscreenWatchWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E5171BE65339ED0D67A1E1D /* Build configuration list for PBXNativeTarget "SunscreenWatchWidget" */;
+			buildPhases = (
+				F0BBA6DB74E66387D0B7222E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SunscreenWatchWidget;
+			packageProductDependencies = (
+			);
+			productName = SunscreenWatchWidget;
+			productReference = 0BE5DCB515AAAF61FFE292C3 /* SunscreenWatchWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		4BD73F9D2B2C89B3B25CF73F /* SunscreenWidgetExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C8459D996743C7389D0B8B5A /* Build configuration list for PBXNativeTarget "SunscreenWidgetExtension" */;
@@ -198,6 +315,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = F2AD90B914C57C47ACEB9E8B /* Build configuration list for PBXProject "DoINeedSunscreen" */;
 			developmentRegion = en;
@@ -214,6 +333,8 @@
 			projectRoot = "";
 			targets = (
 				A042FE2CFD1D1B2B4D0E66C2 /* DoINeedSunscreen */,
+				243642134747611550701E53 /* SunscreenWatch */,
+				3B97E437BA860A2C7CDDE291 /* SunscreenWatchWidget */,
 				4BD73F9D2B2C89B3B25CF73F /* SunscreenWidgetExtension */,
 			);
 		};
@@ -225,6 +346,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7291A1C3269BCF03B85EEF52 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43DAE03E57FAF46B67ADB2C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				974F74DC9794AA476E23C22B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +378,23 @@
 				DFDE129B02CA7A720CDB66E0 /* SunscreenConfigurableProvider.swift in Sources */,
 				A1904549F9CFA35B347C054C /* SunscreenWidget.swift in Sources */,
 				41702BDE7F7AED552058C3F8 /* SunscreenWidgetViews.swift in Sources */,
+				0C82C6C83F84D83D28E100AD /* UVColors.swift in Sources */,
 				19257AD2ACAE5FA2E0A8FF9F /* UserPreferences.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D38E8A07F0C6B965E71D98C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A6D74D2630AA84A07A97D54 /* SolarCalculator.swift in Sources */,
+				2C215DE6A52B6E90491F3AA5 /* SunscreenAlgorithm.swift in Sources */,
+				DE559C62A87572D771E0B395 /* SunscreenWatchApp.swift in Sources */,
+				D71723DDB64E8EE91B1C5BDB /* UVColors.swift in Sources */,
+				FE089B600814F0706995FC2B /* UserPreferences.swift in Sources */,
+				4A32E1A5A907CD7F9E1F1C1A /* WatchContentView.swift in Sources */,
+				BC956FC1066725D6107CAE1D /* WatchLocationManager.swift in Sources */,
+				86E78297EA7E70047FCE9523 /* WatchWeatherService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,9 +413,24 @@
 				95497A43CFC5226F0B6F3162 /* SolarCalculator.swift in Sources */,
 				630D20B10900A16A5F732FA7 /* SunscreenAlgorithm.swift in Sources */,
 				1DDB21C3CE5EBD7DDC3D6CB3 /* TimeChangeView.swift in Sources */,
+				7C4604120CA43847C6B271A0 /* UVColors.swift in Sources */,
 				C52AB8DBC13FAD655F446BE7 /* UVGraphView.swift in Sources */,
 				EE7DF6B81086BF0C5173BC4E /* UserPreferences.swift in Sources */,
 				4D71419EF83B632C926DB20F /* WeatherService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0BBA6DB74E66387D0B7222E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87C7DEBE0AB1BB5EF1EF6CC1 /* SolarCalculator.swift in Sources */,
+				4FC7241EB9384A33B84FD11B /* SunscreenAlgorithm.swift in Sources */,
+				8D92964C9E6C4C0A50F23A33 /* UVColors.swift in Sources */,
+				5FFFC263D1D6D4FBE609608C /* UserPreferences.swift in Sources */,
+				1763DF2E04380F98CA487D2B /* WatchWidget.swift in Sources */,
+				6E40132D88C417331545EDE5 /* WatchWidgetProvider.swift in Sources */,
+				94D5562841F774CDE9D8F7E6 /* WatchWidgetViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,17 +442,40 @@
 			target = 4BD73F9D2B2C89B3B25CF73F /* SunscreenWidgetExtension */;
 			targetProxy = 36A25205BD0D852659BA9DA0 /* PBXContainerItemProxy */;
 		};
+		D66AFCFF24B75499B6816BCF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3B97E437BA860A2C7CDDE291 /* SunscreenWatchWidget */;
+			targetProxy = A9AC362629651B5429CC3925 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0A0AC6A9AC6273A842EA0D9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Watch/SunscreenWatch.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Watch/Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Sunscreen;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.watch.widget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
 		6B42B58912582537E2B9EFCE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Widget/SunscreenWidgetExtension.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sunscreen Widget";
@@ -303,7 +486,6 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.SunscreenWidget;
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -369,10 +551,10 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.9;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -425,10 +607,10 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.9;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -436,10 +618,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Widget/SunscreenWidgetExtension.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sunscreen Widget";
@@ -450,7 +629,6 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.SunscreenWidget;
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -460,6 +638,24 @@
 			};
 			name = Release;
 		};
+		B0D5666FA372D8E7058D931C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Watch/SunscreenWatch.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Watch/Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Sunscreen;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.sunscreenfyi.DoINeedSunscreen;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.watch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
 		B13E39182BC78E98AF79E7C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -467,7 +663,6 @@
 				CODE_SIGN_ENTITLEMENTS = App/DoINeedSunscreen.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_BGTaskSchedulerPermittedIdentifiers = com.sunscreenfyi.DoINeedSunscreen.refreshNotification;
@@ -491,6 +686,24 @@
 			};
 			name = Release;
 		};
+		BD5A3B2E0135BBD6778C9BAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Watch/SunscreenWatch.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Watch/Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Sunscreen;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.sunscreenfyi.DoINeedSunscreen;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.watch;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
 		CEA53639EEF2232F2E38D0D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -498,7 +711,6 @@
 				CODE_SIGN_ENTITLEMENTS = App/DoINeedSunscreen.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_BGTaskSchedulerPermittedIdentifiers = com.sunscreenfyi.DoINeedSunscreen.refreshNotification;
@@ -522,6 +734,27 @@
 			};
 			name = Debug;
 		};
+		DA9A1E36EEE789921F9552A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Watch/SunscreenWatch.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Watch/Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Sunscreen;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.watch.widget;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -530,6 +763,24 @@
 			buildConfigurations = (
 				CEA53639EEF2232F2E38D0D6 /* Debug */,
 				B13E39182BC78E98AF79E7C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5E5171BE65339ED0D67A1E1D /* Build configuration list for PBXNativeTarget "SunscreenWatchWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA9A1E36EEE789921F9552A4 /* Debug */,
+				0A0AC6A9AC6273A842EA0D9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		771C9C8303CA066DACC84AD7 /* Build configuration list for PBXNativeTarget "SunscreenWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0D5666FA372D8E7058D931C /* Debug */,
+				BD5A3B2E0135BBD6778C9BAB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
