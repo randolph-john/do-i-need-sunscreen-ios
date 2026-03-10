@@ -23,7 +23,7 @@ targets:
         INFOPLIST_FILE: Info.plist
         CODE_SIGN_ENTITLEMENTS: App/DoINeedSunscreen.entitlements
         GENERATE_INFOPLIST_FILE: true
-        MARKETING_VERSION: "1.0.0"
+        MARKETING_VERSION: "1.1.0"
         CURRENT_PROJECT_VERSION: 1
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         INFOPLIST_KEY_CFBundleDisplayName: "Do I Need Sunscreen?"
@@ -53,7 +53,7 @@ targets:
         INFOPLIST_FILE: Widget/Info.plist
         CODE_SIGN_ENTITLEMENTS: Widget/SunscreenWidgetExtension.entitlements
         GENERATE_INFOPLIST_FILE: true
-        MARKETING_VERSION: "1.0.0"
+        MARKETING_VERSION: "1.1.0"
         CURRENT_PROJECT_VERSION: 1
         INFOPLIST_KEY_CFBundleDisplayName: "Sunscreen Widget"
     entitlements:
@@ -76,7 +76,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.sunscreenfyi.DoINeedSunscreen.watch
         CODE_SIGN_ENTITLEMENTS: Watch/SunscreenWatch.entitlements
         GENERATE_INFOPLIST_FILE: true
-        MARKETING_VERSION: "1.0.0"
+        MARKETING_VERSION: "1.1.0"
         CURRENT_PROJECT_VERSION: 1
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         INFOPLIST_KEY_WKCompanionAppBundleIdentifier: com.sunscreenfyi.DoINeedSunscreen
@@ -102,7 +102,7 @@ targets:
         INFOPLIST_FILE: Watch/Widget/Info.plist
         CODE_SIGN_ENTITLEMENTS: Watch/SunscreenWatch.entitlements
         GENERATE_INFOPLIST_FILE: true
-        MARKETING_VERSION: "1.0.0"
+        MARKETING_VERSION: "1.1.0"
         CURRENT_PROJECT_VERSION: 1
         INFOPLIST_KEY_CFBundleDisplayName: "Sunscreen"
     entitlements:

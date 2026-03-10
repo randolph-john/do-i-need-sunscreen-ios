@@ -103,7 +103,7 @@
 		130CD1CFE565F86656F2E06E /* NotificationSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		133D74B9542BD568BC18E17F /* UVGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UVGraphView.swift; sourceTree = "<group>"; };
 		15B156598E41A55BBEA74E60 /* WatchWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWidgetProvider.swift; sourceTree = "<group>"; };
-		196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = SunscreenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		196BFD4FA83875459F71C905 /* SunscreenWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SunscreenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		19779A2BC8BA4D4FFD3052A8 /* WatchWeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWeatherService.swift; sourceTree = "<group>"; };
 		1B3E1F7E82A68D7E4A1930C6 /* SunscreenWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SunscreenWidgetExtension.entitlements; sourceTree = "<group>"; };
 		1F3F2BB8703CA75DA9E8DD2E /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 		DD0C9E95094CB09F3DC93DE0 /* DoctorBackedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorBackedView.swift; sourceTree = "<group>"; };
 		E347F9811EAFE869A20CE318 /* WatchWidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWidgetViews.swift; sourceTree = "<group>"; };
 		E85A83CD4733E935DDC4F61E /* SunscreenConfigurableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenConfigurableProvider.swift; sourceTree = "<group>"; };
-		F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DoINeedSunscreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoINeedSunscreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -315,8 +315,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = F2AD90B914C57C47ACEB9E8B /* Build configuration list for PBXProject "DoINeedSunscreen" */;
 			developmentRegion = en;
@@ -455,6 +453,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Watch/SunscreenWatch.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Watch/Widget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Sunscreen;
@@ -463,7 +462,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.watch.widget;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -475,7 +474,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Widget/SunscreenWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sunscreen Widget";
@@ -484,8 +486,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.SunscreenWidget;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -618,7 +621,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Widget/SunscreenWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sunscreen Widget";
@@ -627,8 +633,9 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.SunscreenWidget;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -644,11 +651,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Watch/SunscreenWatch.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Watch/Widget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Sunscreen;
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.sunscreenfyi.DoINeedSunscreen;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.watch;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -663,6 +671,7 @@
 				CODE_SIGN_ENTITLEMENTS = App/DoINeedSunscreen.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_BGTaskSchedulerPermittedIdentifiers = com.sunscreenfyi.DoINeedSunscreen.refreshNotification;
@@ -675,7 +684,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -692,11 +701,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Watch/SunscreenWatch.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Watch/Widget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Sunscreen;
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.sunscreenfyi.DoINeedSunscreen;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.watch;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -711,6 +721,7 @@
 				CODE_SIGN_ENTITLEMENTS = App/DoINeedSunscreen.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_BGTaskSchedulerPermittedIdentifiers = com.sunscreenfyi.DoINeedSunscreen.refreshNotification;
@@ -723,7 +734,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -739,6 +750,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Watch/SunscreenWatch.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y5FMTN3LUJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Watch/Widget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Sunscreen;
@@ -747,7 +759,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.watch.widget;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
