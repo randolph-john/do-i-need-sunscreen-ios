@@ -19,6 +19,12 @@ struct ContentView: View {
     @State private var customTimeZone: TimeZone?
     @State private var selectedTime: Date?
     @State private var showDoctorModal = false
+    @State private var showTour = false
+    @State private var showWidgetGuide = false
+    @State private var tutorialScrollProxy: ScrollViewProxy?
+    @State private var chainWidgetGuideAfterTour = false
+    @AppStorage("hasSeenTour") private var hasSeenTour = false
+    @AppStorage("hasSeenWidgetGuide") private var hasSeenWidgetGuide = false
 
     @StateObject private var notificationManager = NotificationManager.shared
 
@@ -76,6 +82,7 @@ struct ContentView: View {
     }
 
     var body: some View {
+        GeometryReader { geometry in
         ZStack {
             // Full-screen background
             bgColor.ignoresSafeArea()
@@ -89,12 +96,17 @@ struct ContentView: View {
                     .ignoresSafeArea()
             }
 
+            ScrollViewReader { scrollProxy in
             ScrollView {
                 VStack(spacing: 0) {
                     heroSection
+                        .id("hero")
                     uvInfoSection
+                        .id("uvInfo")
                     controlsCard
+                        .id("controls")
                     featuresSection
+                        .id("features")
                     backedByDoctorsButton
                     footerSection
                 }
@@ -104,9 +116,59 @@ struct ContentView: View {
             .refreshable {
                 locationManager.requestLocation()
             }
+            .onAppear { tutorialScrollProxy = scrollProxy }
+            } // ScrollViewReader
+        }
+        .overlayPreferenceValue(SpotlightAnchorKey.self) { anchors in
+            if showTour {
+                SpotlightOverlayView(
+                    isPresented: $showTour,
+                    onComplete: {
+                        hasSeenTour = true
+                        if chainWidgetGuideAfterTour {
+                            chainWidgetGuideAfterTour = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                showWidgetGuide = true
+                            }
+                        }
+                    },
+                    anchors: anchors,
+                    proxy: geometry,
+                    scrollProxy: tutorialScrollProxy
+                )
+                .transition(.opacity)
+            }
+            if showWidgetGuide {
+                Color.black.opacity(0.95)
+                    .ignoresSafeArea()
+                    .transition(.opacity)
+                WidgetGuideView(onDismiss: {
+                    hasSeenWidgetGuide = true
+                    withAnimation(.easeOut(duration: 0.25)) {
+                        showWidgetGuide = false
+                    }
+                })
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
         }
         .onAppear {
             locationManager.requestPermission()
+            // Auto-show tour on first launch (if location already granted)
+            if !hasSeenTour && (locationManager.authorizationStatus == .authorizedWhenInUse || locationManager.authorizationStatus == .authorizedAlways) {
+                chainWidgetGuideAfterTour = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    if !showTour { showTour = true }
+                }
+            }
+        }
+        .onChange(of: locationManager.authorizationStatus) { status in
+            // Auto-show tour when location is first granted
+            if !hasSeenTour && (status == .authorizedWhenInUse || status == .authorizedAlways) {
+                chainWidgetGuideAfterTour = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    if !showTour { showTour = true }
+                }
+            }
         }
         .onChange(of: locationManager.location) { newLocation in
             // Only use GPS location if not using a custom one
@@ -169,6 +231,7 @@ struct ContentView: View {
         .sheet(isPresented: $showNotificationSettings) {
             NotificationSettingsView(isPresented: $showNotificationSettings, preferences: preferences, notificationManager: notificationManager)
         }
+        } // GeometryReader
     }
 
     // MARK: - Algorithm Result
@@ -317,6 +380,7 @@ struct ContentView: View {
                     .foregroundColor(textColor)
                     .shadow(color: .black.opacity(0.3), radius: 4, x: 2, y: 2)
                     .tracking(4)
+                    .anchorPreference(key: SpotlightAnchorKey.self, value: .bounds) { [.answer: $0] }
 
                 // Reapplication time
                 if result.needsSunscreen, let safeMin = result.safeExposureMinutes, safeMin > 0 {
@@ -431,6 +495,7 @@ struct ContentView: View {
                         .padding(.top, 4)
                 }
             }
+            .anchorPreference(key: SpotlightAnchorKey.self, value: .bounds) { [.timeLocation: $0] }
             .padding(.bottom, 30)
         }
     }
@@ -439,6 +504,8 @@ struct ContentView: View {
 
     private var controlsCard: some View {
         VStack(spacing: 24) {
+            // Skin Type & Time Outdoors (tutorial spotlight target)
+            VStack(spacing: 24) {
             // Skin Type Slider
             VStack(spacing: 8) {
                 HStack(spacing: 8) {
@@ -470,6 +537,8 @@ struct ContentView: View {
                 Slider(value: $preferences.durationMinutes, in: 15...480, step: 15)
                     .tint(.blue)
             }
+            }
+            .anchorPreference(key: SpotlightAnchorKey.self, value: .bounds) { [.inputs: $0] }
 
             // Surface Toggle Buttons
             VStack(spacing: 10) {
@@ -607,6 +676,7 @@ struct ContentView: View {
                     goldButtonLabel(preferences.notificationsEnabled ? "Enabled" : "Enable")
                 }
             }
+            .anchorPreference(key: SpotlightAnchorKey.self, value: .bounds) { [.notifications: $0] }
 
             // Divider
             Rectangle()
@@ -629,16 +699,46 @@ struct ContentView: View {
                 .frame(height: 1)
                 .padding(.horizontal)
 
+            // Walkthrough
+            featureRow(title: "Walkthrough") {
+                Button {
+                    showTour = true
+                } label: {
+                    goldButtonLabel("Start")
+                }
+            }
+
+            // Divider
+            Rectangle()
+                .fill(textColor.opacity(0.15))
+                .frame(height: 1)
+                .padding(.horizontal)
+
+            // Add Widget
+            featureRow(title: "Add widget") {
+                Button {
+                    showWidgetGuide = true
+                } label: {
+                    goldButtonLabel("Add")
+                }
+            }
+
+            // Divider
+            Rectangle()
+                .fill(textColor.opacity(0.15))
+                .frame(height: 1)
+                .padding(.horizontal)
+
             // Share Result
             featureRow(title: "Share result") {
-                HStack(spacing: 0) {
+                VStack(spacing: 8) {
                     Button {
                         showShareSheet(text: shareText(perspective: .me))
                     } label: {
-                        Text("Me")
-                            .font(.system(size: 14, weight: .bold))
+                        Text(result.needsSunscreen ? "I need sunscreen" : "I don't need sunscreen")
+                            .font(.system(size: 13, weight: .bold))
                             .foregroundColor(.black)
-                            .frame(width: 70)
+                            .padding(.horizontal, 16)
                             .padding(.vertical, 10)
                             .background(
                                 LinearGradient(
@@ -647,21 +747,15 @@ struct ContentView: View {
                                     endPoint: .bottomTrailing
                                 )
                             )
+                            .cornerRadius(6)
                     }
-                    .clipShape(RoundedCorner(radius: 6, corners: [.topLeft, .bottomLeft]))
-
-                    // Thin separator
-                    Rectangle()
-                        .fill(Color.black.opacity(0.15))
-                        .frame(width: 1)
-
                     Button {
                         showShareSheet(text: shareText(perspective: .you))
                     } label: {
-                        Text("You")
-                            .font(.system(size: 14, weight: .bold))
+                        Text(result.needsSunscreen ? "You need sunscreen" : "You don't need sunscreen")
+                            .font(.system(size: 13, weight: .bold))
                             .foregroundColor(.black)
-                            .frame(width: 70)
+                            .padding(.horizontal, 16)
                             .padding(.vertical, 10)
                             .background(
                                 LinearGradient(
@@ -670,8 +764,8 @@ struct ContentView: View {
                                     endPoint: .bottomTrailing
                                 )
                             )
+                            .cornerRadius(6)
                     }
-                    .clipShape(RoundedCorner(radius: 6, corners: [.topRight, .bottomRight]))
                 }
             }
         }
