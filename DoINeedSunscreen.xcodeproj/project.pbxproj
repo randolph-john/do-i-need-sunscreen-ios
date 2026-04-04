@@ -42,6 +42,7 @@
 		A2338A6547C626172F747EBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */; };
 		A3E3A028E94D208ADC942E7C /* SunscreenWatchWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0BE5DCB515AAAF61FFE292C3 /* SunscreenWatchWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BC956FC1066725D6107CAE1D /* WatchLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3369FD5B399BE49BA5F6B5 /* WatchLocationManager.swift */; };
+		BEA07E53624824FB7762C1AC /* ReapplicationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA12D05BB625BF9D64ADAE11 /* ReapplicationInfoView.swift */; };
 		C4B5B44AB3F6FD3FC2C65F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58DDD5CEC082117CC85085E9 /* Assets.xcassets */; };
 		C52AB8DBC13FAD655F446BE7 /* UVGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133D74B9542BD568BC18E17F /* UVGraphView.swift */; };
 		D5F0860D8F7BBF63913EB986 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CD1CFE565F86656F2E06E /* NotificationSettingsView.swift */; };
@@ -131,6 +132,7 @@
 		CC872A78D7644736A0EEAAB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4163CBA80143BBCE340240B /* WatchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentView.swift; sourceTree = "<group>"; };
 		D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarCalculator.swift; sourceTree = "<group>"; };
+		DA12D05BB625BF9D64ADAE11 /* ReapplicationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReapplicationInfoView.swift; sourceTree = "<group>"; };
 		DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoINeedSunscreenApp.swift; sourceTree = "<group>"; };
 		DC672778E94F90198F10744F /* WatchWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchWidget.swift; sourceTree = "<group>"; };
 		DD0C9E95094CB09F3DC93DE0 /* DoctorBackedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorBackedView.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				A4D4AF0EF9C12C09BFF37791 /* LocationManager.swift */,
 				1F3F2BB8703CA75DA9E8DD2E /* NotificationManager.swift */,
 				130CD1CFE565F86656F2E06E /* NotificationSettingsView.swift */,
+				DA12D05BB625BF9D64ADAE11 /* ReapplicationInfoView.swift */,
 				99BF979E177DA7566EB157C2 /* SkinTypeQuizView.swift */,
 				3EF1351EFFCB099AABD81390 /* SpotlightOverlayView.swift */,
 				3301F6A1A17853818A3082D7 /* TimeChangeView.swift */,
@@ -415,6 +418,7 @@
 				DCCA5F2B98B6E3874939F76F /* LocationManager.swift in Sources */,
 				95B8519720B148FF8475A7F3 /* NotificationManager.swift in Sources */,
 				D5F0860D8F7BBF63913EB986 /* NotificationSettingsView.swift in Sources */,
+				BEA07E53624824FB7762C1AC /* ReapplicationInfoView.swift in Sources */,
 				5DE4FC50A98A1BD914BA7679 /* SkinTypeQuizView.swift in Sources */,
 				95497A43CFC5226F0B6F3162 /* SolarCalculator.swift in Sources */,
 				06B1C4208779E7E460C50982 /* SpotlightOverlayView.swift in Sources */,

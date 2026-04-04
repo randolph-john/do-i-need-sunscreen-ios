@@ -66,16 +66,10 @@ struct WatchContentView: View {
             )
         }
 
-        let reapply = SunscreenAlgorithm.reapplicationTime(
-            uvIndex: weatherService.uvIndex,
-            skinType: preferences.skinType,
-            durationMinutes: preferences.durationMinutes
-        )
         return SunscreenResult(
             needsSunscreen: needs,
             uvIndex: weatherService.uvIndex,
-            safeExposureMinutes: safeTime,
-            reapplicationMinutes: reapply
+            safeExposureMinutes: safeTime
         )
     }
 

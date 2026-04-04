@@ -19,6 +19,7 @@ struct ContentView: View {
     @State private var customTimeZone: TimeZone?
     @State private var selectedTime: Date?
     @State private var showDoctorModal = false
+    @State private var showReapplicationInfo = false
     @State private var showTour = false
     @State private var showWidgetGuide = false
     @State private var tutorialScrollProxy: ScrollViewProxy?
@@ -228,6 +229,9 @@ struct ContentView: View {
         .sheet(isPresented: $showDoctorModal) {
             DoctorBackedView(isPresented: $showDoctorModal)
         }
+        .sheet(isPresented: $showReapplicationInfo) {
+            ReapplicationInfoView(isPresented: $showReapplicationInfo)
+        }
         .sheet(isPresented: $showNotificationSettings) {
             NotificationSettingsView(isPresented: $showNotificationSettings, preferences: preferences, notificationManager: notificationManager)
         }
@@ -296,16 +300,10 @@ struct ContentView: View {
             )
         }
 
-        let reapply = SunscreenAlgorithm.reapplicationTime(
-            uvIndex: weatherService.uvIndex,
-            skinType: preferences.skinType,
-            durationMinutes: preferences.durationMinutes
-        )
         return SunscreenResult(
             needsSunscreen: needs,
             uvIndex: weatherService.uvIndex,
-            safeExposureMinutes: safeTime,
-            reapplicationMinutes: reapply
+            safeExposureMinutes: safeTime
         )
     }
 
@@ -382,12 +380,21 @@ struct ContentView: View {
                     .tracking(4)
                     .anchorPreference(key: SpotlightAnchorKey.self, value: .bounds) { [.answer: $0] }
 
-                // Reapplication time
+                // Safe exposure time
                 if result.needsSunscreen, let safeMin = result.safeExposureMinutes, safeMin > 0 {
                     Text("Apply within \(SunscreenAlgorithm.formatDuration(minutes: safeMin)) to avoid burn")
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(textColor.opacity(0.85))
                         .padding(.top, 4)
+                }
+
+                if result.needsSunscreen {
+                    Button("What about reapplication?") {
+                        showReapplicationInfo = true
+                    }
+                    .font(.system(size: 14).italic())
+                    .foregroundColor(Color(hex: "#4A90E2"))
+                    .padding(.top, 8)
                 }
 
                 Spacer().frame(height: 20)
@@ -720,6 +727,21 @@ struct ContentView: View {
                     showWidgetGuide = true
                 } label: {
                     goldButtonLabel("Add")
+                }
+            }
+
+            // Divider
+            Rectangle()
+                .fill(textColor.opacity(0.15))
+                .frame(height: 1)
+                .padding(.horizontal)
+
+            // Reapplication Info
+            featureRow(title: "Reapplication guide") {
+                Button {
+                    showReapplicationInfo = true
+                } label: {
+                    goldButtonLabel("Learn more")
                 }
             }
 

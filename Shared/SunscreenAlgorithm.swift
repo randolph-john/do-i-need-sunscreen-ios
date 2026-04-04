@@ -264,19 +264,6 @@ struct SunscreenAlgorithm {
         return Int(safeTime.rounded())
     }
 
-    /// Calculate sunscreen reapplication time in minutes
-    static func reapplicationTime(uvIndex: Double, skinType: SkinType, durationMinutes: Double) -> Int? {
-        guard needsSunscreen(uvIndex: uvIndex, skinType: skinType, durationMinutes: durationMinutes) else {
-            return nil
-        }
-
-        var baseTime = 120 // 2 hours
-        if uvIndex > 7 { baseTime = 90 }
-        if uvIndex > 10 { baseTime = 60 }
-
-        return min(baseTime, Int(durationMinutes))
-    }
-
     /// Format duration in minutes to a readable string
     static func formatDuration(minutes: Int) -> String {
         if minutes < 60 {
@@ -447,7 +434,6 @@ struct SunscreenResult {
     let needsSunscreen: Bool
     let uvIndex: Double
     let safeExposureMinutes: Int?
-    let reapplicationMinutes: Int?
 
     var recommendation: String {
         if uvIndex == 0 {
