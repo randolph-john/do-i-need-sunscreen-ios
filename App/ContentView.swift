@@ -679,7 +679,7 @@ struct ContentView: View {
         var parts = [headline, "", skin]
         if !location.isEmpty { parts.append(location) }
         parts.append("")
-        parts.append("https://sunscreen.fyi/")
+        parts.append("https://apps.apple.com/app/id6759970432")
         return parts.joined(separator: "\n")
     }
 
