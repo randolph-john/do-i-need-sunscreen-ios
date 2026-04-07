@@ -195,6 +195,7 @@ struct SkinTypeQuizView: View {
             Button("Use This Skin Type") {
                 preferences.skinType = skinType
                 preferences.hasCompletedQuiz = true
+                AnalyticsService.logEvent("quiz_completed", parameters: ["skin_type": skinType.label])
                 isPresented = false
             }
             .buttonStyle(.borderedProminent)

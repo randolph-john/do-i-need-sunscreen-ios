@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		06B1C4208779E7E460C50982 /* SpotlightOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF1351EFFCB099AABD81390 /* SpotlightOverlayView.swift */; };
+		0A02AABA8C83EFD00D56289E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 588BB483673288055CDFC2FD /* GoogleService-Info.plist */; };
 		0C82C6C83F84D83D28E100AD /* UVColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E975D6D3D3D1BBCD2551DE0 /* UVColors.swift */; };
 		1763DF2E04380F98CA487D2B /* WatchWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC672778E94F90198F10744F /* WatchWidget.swift */; };
 		19257AD2ACAE5FA2E0A8FF9F /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AA21514E80074EDF7A0F96 /* UserPreferences.swift */; };
@@ -19,6 +20,7 @@
 		30A14AB79942B735CDE63188 /* SunscreenAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */; };
 		41702BDE7F7AED552058C3F8 /* SunscreenWidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B895C2D6B058F7F6685C6E /* SunscreenWidgetViews.swift */; };
 		41F665ECBE7EBFB25D31F7D2 /* SolarCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */; };
+		4414DD333270BBC8DE0F73DB /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D00C7FCC6EA3F532D8FC59D3 /* PrivacyInfo.xcprivacy */; };
 		4A32E1A5A907CD7F9E1F1C1A /* WatchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4163CBA80143BBCE340240B /* WatchContentView.swift */; };
 		4D71419EF83B632C926DB20F /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2BC4D3677A5D1F3975E1F8 /* WeatherService.swift */; };
 		4FC7241EB9384A33B84FD11B /* SunscreenAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE64E6C36B71D500D0B1191 /* SunscreenAlgorithm.swift */; };
@@ -42,9 +44,10 @@
 		A2338A6547C626172F747EBD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */; };
 		A3E3A028E94D208ADC942E7C /* SunscreenWatchWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0BE5DCB515AAAF61FFE292C3 /* SunscreenWatchWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BC956FC1066725D6107CAE1D /* WatchLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3369FD5B399BE49BA5F6B5 /* WatchLocationManager.swift */; };
+		BCC28085D51621425B182E73 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DB267A56EC29B7776C756276 /* FirebaseAnalytics */; };
 		BEA07E53624824FB7762C1AC /* ReapplicationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA12D05BB625BF9D64ADAE11 /* ReapplicationInfoView.swift */; };
-		C4B5B44AB3F6FD3FC2C65F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58DDD5CEC082117CC85085E9 /* Assets.xcassets */; };
 		C52AB8DBC13FAD655F446BE7 /* UVGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133D74B9542BD568BC18E17F /* UVGraphView.swift */; };
+		C7F0520A95D91E7CA7E06F02 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECFF203DCC474B85B3071C9 /* AnalyticsService.swift */; };
 		D5F0860D8F7BBF63913EB986 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CD1CFE565F86656F2E06E /* NotificationSettingsView.swift */; };
 		D71723DDB64E8EE91B1C5BDB /* UVColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E975D6D3D3D1BBCD2551DE0 /* UVColors.swift */; };
 		DCCA5F2B98B6E3874939F76F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4AF0EF9C12C09BFF37791 /* LocationManager.swift */; };
@@ -117,8 +120,9 @@
 		37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3EF1351EFFCB099AABD81390 /* SpotlightOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightOverlayView.swift; sourceTree = "<group>"; };
 		57D844D2829BDE2E58CB00C7 /* WidgetGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetGuideView.swift; sourceTree = "<group>"; };
-		58DDD5CEC082117CC85085E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		588BB483673288055CDFC2FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5D52846E23EA6412345891F4 /* SunscreenWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWatchApp.swift; sourceTree = "<group>"; };
+		5ECFF203DCC474B85B3071C9 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		6AC51B1C30242C63CD56DE82 /* SunscreenWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenWidget.swift; sourceTree = "<group>"; };
 		6B2BC4D3677A5D1F3975E1F8 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		70F9DE13678337E6095817DD /* SunscreenAppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenAppIntent.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 		AD47B5A781F0159DC2E1B16B /* DoINeedSunscreen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DoINeedSunscreen.entitlements; sourceTree = "<group>"; };
 		B325B98B934285DBB98E8335 /* LocationChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationChangeView.swift; sourceTree = "<group>"; };
 		CC872A78D7644736A0EEAAB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D00C7FCC6EA3F532D8FC59D3 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		D4163CBA80143BBCE340240B /* WatchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentView.swift; sourceTree = "<group>"; };
 		D5A6D62FBF4659C953CDC764 /* SolarCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarCalculator.swift; sourceTree = "<group>"; };
 		DA12D05BB625BF9D64ADAE11 /* ReapplicationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReapplicationInfoView.swift; sourceTree = "<group>"; };
@@ -140,6 +145,17 @@
 		E85A83CD4733E935DDC4F61E /* SunscreenConfigurableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunscreenConfigurableProvider.swift; sourceTree = "<group>"; };
 		F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DoINeedSunscreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B6D7B7DA3BEB83090F2EDF20 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCC28085D51621425B182E73 /* FirebaseAnalytics in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0581917470D13C0E0A41EE0C /* Widget */ = {
@@ -192,15 +208,18 @@
 		5C25E6A4A2D1A508C6624585 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				5ECFF203DCC474B85B3071C9 /* AnalyticsService.swift */,
 				CC872A78D7644736A0EEAAB4 /* Assets.xcassets */,
 				37AD8AADBE9DF68E0A76DDFB /* ContentView.swift */,
 				DD0C9E95094CB09F3DC93DE0 /* DoctorBackedView.swift */,
 				AD47B5A781F0159DC2E1B16B /* DoINeedSunscreen.entitlements */,
 				DB8AA4ACC11DF8EE06D42FE3 /* DoINeedSunscreenApp.swift */,
+				588BB483673288055CDFC2FD /* GoogleService-Info.plist */,
 				B325B98B934285DBB98E8335 /* LocationChangeView.swift */,
 				A4D4AF0EF9C12C09BFF37791 /* LocationManager.swift */,
 				1F3F2BB8703CA75DA9E8DD2E /* NotificationManager.swift */,
 				130CD1CFE565F86656F2E06E /* NotificationSettingsView.swift */,
+				D00C7FCC6EA3F532D8FC59D3 /* PrivacyInfo.xcprivacy */,
 				DA12D05BB625BF9D64ADAE11 /* ReapplicationInfoView.swift */,
 				99BF979E177DA7566EB157C2 /* SkinTypeQuizView.swift */,
 				3EF1351EFFCB099AABD81390 /* SpotlightOverlayView.swift */,
@@ -215,7 +234,6 @@
 		63CEEC9C7A41753871AAD23F /* Widget */ = {
 			isa = PBXGroup;
 			children = (
-				58DDD5CEC082117CC85085E9 /* Assets.xcassets */,
 				9A0DF0742B850C432DFC8D3F /* Info.plist */,
 				70F9DE13678337E6095817DD /* SunscreenAppIntent.swift */,
 				E85A83CD4733E935DDC4F61E /* SunscreenConfigurableProvider.swift */,
@@ -283,7 +301,6 @@
 			buildConfigurationList = C8459D996743C7389D0B8B5A /* Build configuration list for PBXNativeTarget "SunscreenWidgetExtension" */;
 			buildPhases = (
 				873CEADCD373F92F51E8966E /* Sources */,
-				69041FEF092B365E63653665 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -302,6 +319,7 @@
 			buildPhases = (
 				DBC56C6E55DB9608B76772CE /* Sources */,
 				2EC23BC0C688F780575232F8 /* Resources */,
+				B6D7B7DA3BEB83090F2EDF20 /* Frameworks */,
 				3FCE0CC437A2C6E6F6D9F1E9 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -311,6 +329,7 @@
 			);
 			name = DoINeedSunscreen;
 			packageProductDependencies = (
+				DB267A56EC29B7776C756276 /* FirebaseAnalytics */,
 			);
 			productName = DoINeedSunscreen;
 			productReference = F0187DBABE6E3E5EC0EC40F3 /* DoINeedSunscreen.app */;
@@ -336,6 +355,9 @@
 			);
 			mainGroup = F6485D4C749BC7A4EB9451BA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2237519D7037E2C0F3888B0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0FB12BB51067D56D9F0141BF /* Products */;
 			projectDirPath = "";
@@ -355,6 +377,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7291A1C3269BCF03B85EEF52 /* Assets.xcassets in Resources */,
+				0A02AABA8C83EFD00D56289E /* GoogleService-Info.plist in Resources */,
+				4414DD333270BBC8DE0F73DB /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,14 +387,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				974F74DC9794AA476E23C22B /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		69041FEF092B365E63653665 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C4B5B44AB3F6FD3FC2C65F00 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +427,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7F0520A95D91E7CA7E06F02 /* AnalyticsService.swift in Sources */,
 				A2338A6547C626172F747EBD /* ContentView.swift in Sources */,
 				2B712E1A1E39201C0583567F /* DoINeedSunscreenApp.swift in Sources */,
 				2E349056FF16DF42E6995E87 /* DoctorBackedView.swift in Sources */,
@@ -816,6 +833,25 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2237519D7037E2C0F3888B0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DB267A56EC29B7776C756276 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2237519D7037E2C0F3888B0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DE2C7F2A080C799A977B852A /* Project object */;
 }

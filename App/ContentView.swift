@@ -106,8 +106,8 @@ struct ContentView: View {
                         .id("uvInfo")
                     controlsCard
                         .id("controls")
-                    featuresSection
-                        .id("features")
+                    quickActionsGrid
+                        .id("settings")
                     backedByDoctorsButton
                     footerSection
                 }
@@ -195,6 +195,13 @@ struct ContentView: View {
             }
             notificationManager.refreshPermissionStatus()
             notificationManager.scheduleNotifications()
+            AnalyticsService.logEvent("app_opened", parameters: [
+                "uv_index": Int(weatherService.uvIndex),
+                "needs_sunscreen": result.needsSunscreen,
+                "skin_type": preferences.skinType.label
+            ])
+            AnalyticsService.setUserProperty(preferences.skinType.label, forName: "skin_type")
+            AnalyticsService.setUserProperty(preferences.notificationsEnabled ? "true" : "false", forName: "notifications_enabled")
         }
         .onReceive(Timer.publish(every: 600, on: .main, in: .common).autoconnect()) { _ in
             // Refresh weather every 10 minutes while in foreground
@@ -391,6 +398,7 @@ struct ContentView: View {
                 if result.needsSunscreen {
                     Button("What about reapplication?") {
                         showReapplicationInfo = true
+                        AnalyticsService.logEvent("reapplication_info_opened")
                     }
                     .font(.system(size: 14).italic())
                     .foregroundColor(Color(hex: "#4A90E2"))
@@ -429,6 +437,7 @@ struct ContentView: View {
                             .foregroundColor(textColor.opacity(0.8))
                         Button("change") {
                             showLocationChange = true
+                            AnalyticsService.logEvent("location_change_opened")
                         }
                         .font(.system(size: 12).italic())
                         .foregroundColor(Color(hex: "#4A90E2"))
@@ -446,6 +455,7 @@ struct ContentView: View {
                                     if alt >= 0 { preferences.elevationFeet = alt * 3.28084 }
                                     Task { await weatherService.fetchWeather(for: loc) }
                                 }
+                                AnalyticsService.logEvent("location_reset")
                             }
                             .font(.system(size: 12).italic())
                             .foregroundColor(Color(hex: "#4A90E2"))
@@ -474,6 +484,7 @@ struct ContentView: View {
                         .foregroundColor(textColor.opacity(0.8))
                     Button("change") {
                         showTimePicker = true
+                        AnalyticsService.logEvent("time_change_opened")
                     }
                     .font(.system(size: 12).italic())
                     .foregroundColor(Color(hex: "#4A90E2"))
@@ -485,6 +496,7 @@ struct ContentView: View {
                         Button("reset") {
                             selectedTime = nil
                             weatherService.selectTime(nil)
+                            AnalyticsService.logEvent("time_reset")
                         }
                         .font(.system(size: 12).italic())
                         .foregroundColor(Color(hex: "#4A90E2"))
@@ -671,152 +683,6 @@ struct ContentView: View {
         return parts.joined(separator: "\n")
     }
 
-    // MARK: - Features Section (dark card at bottom)
-
-    private var featuresSection: some View {
-        VStack(spacing: 0) {
-            // Daily Notifications
-            featureRow(title: "Daily notifications") {
-                Button {
-                    showNotificationSettings = true
-                } label: {
-                    goldButtonLabel(preferences.notificationsEnabled ? "Enabled" : "Enable")
-                }
-            }
-            .anchorPreference(key: SpotlightAnchorKey.self, value: .bounds) { [.notifications: $0] }
-
-            // Divider
-            Rectangle()
-                .fill(textColor.opacity(0.15))
-                .frame(height: 1)
-                .padding(.horizontal)
-
-            // Skin Type Quiz
-            featureRow(title: "What skin type am I?") {
-                Button {
-                    showQuiz = true
-                } label: {
-                    goldButtonLabel("Take quiz")
-                }
-            }
-
-            // Divider
-            Rectangle()
-                .fill(textColor.opacity(0.15))
-                .frame(height: 1)
-                .padding(.horizontal)
-
-            // Walkthrough
-            featureRow(title: "Walkthrough") {
-                Button {
-                    showTour = true
-                } label: {
-                    goldButtonLabel("Start")
-                }
-            }
-
-            // Divider
-            Rectangle()
-                .fill(textColor.opacity(0.15))
-                .frame(height: 1)
-                .padding(.horizontal)
-
-            // Add Widget
-            featureRow(title: "Add widget") {
-                Button {
-                    showWidgetGuide = true
-                } label: {
-                    goldButtonLabel("Add")
-                }
-            }
-
-            // Divider
-            Rectangle()
-                .fill(textColor.opacity(0.15))
-                .frame(height: 1)
-                .padding(.horizontal)
-
-            // Reapplication Info
-            featureRow(title: "Reapplication guide") {
-                Button {
-                    showReapplicationInfo = true
-                } label: {
-                    goldButtonLabel("Learn more")
-                }
-            }
-
-            // Divider
-            Rectangle()
-                .fill(textColor.opacity(0.15))
-                .frame(height: 1)
-                .padding(.horizontal)
-
-            // Share Result
-            featureRow(title: "Share result") {
-                VStack(spacing: 8) {
-                    Button {
-                        showShareSheet(text: shareText(perspective: .me))
-                    } label: {
-                        Text(result.needsSunscreen ? "I need sunscreen" : "I don't need sunscreen")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(.black)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 10)
-                            .background(
-                                LinearGradient(
-                                    colors: [Color(hex: "#FFD700"), Color(hex: "#FFED4E")],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                            .cornerRadius(6)
-                    }
-                    Button {
-                        showShareSheet(text: shareText(perspective: .you))
-                    } label: {
-                        Text(result.needsSunscreen ? "You need sunscreen" : "You don't need sunscreen")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(.black)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 10)
-                            .background(
-                                LinearGradient(
-                                    colors: [Color(hex: "#FFD700"), Color(hex: "#FFED4E")],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                            .cornerRadius(6)
-                    }
-                }
-            }
-        }
-        .padding(20)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(isDark
-                      ? Color.white.opacity(0.08)
-                      : Color.black.opacity(0.15))
-        )
-        .padding(.bottom, 20)
-    }
-
-    private func goldButtonLabel(_ text: String) -> some View {
-        Text(text)
-            .font(.system(size: 14, weight: .bold))
-            .foregroundColor(.black)
-            .padding(.horizontal, 24)
-            .padding(.vertical, 10)
-            .background(
-                LinearGradient(
-                    colors: [Color(hex: "#FFD700"), Color(hex: "#FFED4E")],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            )
-            .cornerRadius(6)
-    }
-
     private func showShareSheet(text: String) {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let rootVC = windowScene.windows.first?.rootViewController else { return }
@@ -834,35 +700,88 @@ struct ContentView: View {
         WidgetCenter.shared.reloadAllTimelines()
     }
 
-    private func featureRow(title: String, @ViewBuilder action: () -> some View) -> some View {
-        VStack(spacing: 12) {
-            Text(title)
-                .font(.system(size: 17, weight: .medium))
-                .foregroundColor(textColor)
-            action()
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 16)
-    }
-
     // MARK: - Backed by Doctors
 
     private var backedByDoctorsButton: some View {
         Button {
             showDoctorModal = true
+            AnalyticsService.logEvent("doctor_backed_opened")
         } label: {
-            Text("Backed by doctors")
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(textColor.opacity(0.7))
-                .padding(.vertical, 10)
-                .padding(.horizontal, 20)
-                .background(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(textColor.opacity(0.3), lineWidth: 1)
-                )
+            HStack(spacing: 4) {
+                Image(systemName: "stethoscope")
+                    .font(.system(size: 12))
+                Text("Backed by doctors")
+                    .font(.system(size: 13).italic())
+                    .underline()
+            }
+            .foregroundColor(textColor.opacity(0.5))
         }
         .frame(maxWidth: .infinity)
         .padding(.bottom, 24)
+    }
+
+    // MARK: - Quick Actions Grid
+
+    private var quickActionsGrid: some View {
+        let columns = [
+            GridItem(.flexible(), spacing: 12),
+            GridItem(.flexible(), spacing: 12)
+        ]
+        return VStack(spacing: 12) {
+            LazyVGrid(columns: columns, spacing: 12) {
+                quickActionButton(
+                    icon: "bell",
+                    label: "Daily notifications",
+                    trailingIcon: preferences.notificationsEnabled ? "checkmark.square.fill" : nil,
+                    trailingIconColor: .green
+                ) {
+                    showNotificationSettings = true
+                    AnalyticsService.logEvent("notification_settings_opened")
+                }
+                .anchorPreference(key: SpotlightAnchorKey.self, value: .bounds) { [.settings: $0] }
+                quickActionButton(icon: "rectangle.on.rectangle", label: "Add widgets") {
+                    showWidgetGuide = true
+                    AnalyticsService.logEvent("widget_guide_opened")
+                }
+                quickActionButton(icon: "person.text.rectangle", label: "Skin type quiz") {
+                    showQuiz = true
+                    AnalyticsService.logEvent("skin_type_quiz_opened")
+                }
+                quickActionButton(icon: "hand.point.up.left", label: "Walkthrough") {
+                    showTour = true
+                    AnalyticsService.logEvent("walkthrough_started")
+                }
+            }
+            quickActionButton(icon: "square.and.arrow.up", label: "Share my result") {
+                showShareSheet(text: shareText(perspective: .me))
+                AnalyticsService.logEvent("result_shared", parameters: ["needs_sunscreen": result.needsSunscreen])
+            }
+        }
+        .padding(.bottom, 24)
+    }
+
+    private func quickActionButton(icon: String, label: String, trailingIcon: String? = nil, trailingIconColor: Color? = nil, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 6) {
+                Image(systemName: icon)
+                    .font(.system(size: 13))
+                    .foregroundColor(textColor.opacity(0.7))
+                Text(label)
+                    .font(.system(size: 13, weight: .medium))
+                if let trailingIcon {
+                    Image(systemName: trailingIcon)
+                        .font(.system(size: 13))
+                        .foregroundColor(trailingIconColor ?? textColor.opacity(0.7))
+                }
+            }
+            .foregroundColor(textColor.opacity(0.7))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 10)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(textColor.opacity(0.3), lineWidth: 1)
+            )
+        }
     }
 
     // MARK: - Footer
@@ -881,6 +800,7 @@ struct ContentView: View {
                 footerDot
 
                 Button {
+                    AnalyticsService.logEvent("feedback_tapped")
                     if let url = URL(string: "mailto:john_randolph@alumni.brown.edu?subject=Sunscreen%20App%20Feedback") {
                         UIApplication.shared.open(url)
                     }

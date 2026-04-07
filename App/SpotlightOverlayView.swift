@@ -6,14 +6,14 @@ enum TutorialStep: Int, CaseIterable {
     case answer = 0
     case inputs
     case timeLocation
-    case notifications
+    case settings
 
     var title: String {
         switch self {
         case .answer: return "Your Answer"
         case .inputs: return "Personalize It"
         case .timeLocation: return "Change Time & Place"
-        case .notifications: return "Daily Reminders"
+        case .settings: return "Daily Reminders"
         }
     }
 
@@ -21,8 +21,8 @@ enum TutorialStep: Int, CaseIterable {
         switch self {
         case .answer: return "Your real-time sunscreen recommendation."
         case .inputs: return "Set your skin type and time outside."
-        case .timeLocation: return "Check any time or place."
-        case .notifications: return "Get reminded before you go out."
+        case .timeLocation: return "Check any time and place."
+        case .settings: return "Get reminded every morning."
         }
     }
 
@@ -31,7 +31,7 @@ enum TutorialStep: Int, CaseIterable {
         case .answer: return "hero"
         case .inputs: return "controls"
         case .timeLocation: return "uvInfo"
-        case .notifications: return "features"
+        case .settings: return "settings"
         }
     }
 }
@@ -127,73 +127,84 @@ struct SpotlightOverlayView: View {
             let screenHeight = proxy.size.height + safeTop
             let showBelow = adjustedRect.midY < screenHeight / 2
 
-            VStack(spacing: 16) {
-                Text(currentStep.title)
-                    .font(.system(size: 22, weight: .bold))
-                    .foregroundColor(.white)
-
-                Text(currentStep.description)
-                    .font(.system(size: 16))
-                    .foregroundColor(.white.opacity(0.85))
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                // Step dots
-                HStack(spacing: 8) {
-                    ForEach(0..<totalSteps, id: \.self) { i in
-                        Circle()
-                            .fill(i == currentIndex ? Color(hex: "#FFD700") : Color.white.opacity(0.4))
-                            .frame(width: 8, height: 8)
-                    }
+            VStack {
+                if !showBelow {
+                    Spacer(minLength: 0)
                 }
-                .padding(.top, 4)
 
-                // Buttons
-                HStack(spacing: 16) {
-                    Button("Skip") {
-                        dismiss()
-                    }
-                    .font(.system(size: 15, weight: .medium))
-                    .foregroundColor(.white.opacity(0.7))
+                tooltipContent
 
-                    Spacer()
-
-                    Button {
-                        advance()
-                    } label: {
-                        Text(currentIndex < totalSteps - 1 ? "Next" : "Done")
-                            .font(.system(size: 15, weight: .bold))
-                            .foregroundColor(.black)
-                            .padding(.horizontal, 28)
-                            .padding(.vertical, 10)
-                            .background(
-                                LinearGradient(
-                                    colors: [Color(hex: "#FFD700"), Color(hex: "#FFED4E")],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                            .cornerRadius(8)
-                    }
+                if showBelow {
+                    Spacer(minLength: 0)
                 }
             }
-            .padding(24)
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(Color.black.opacity(0.85))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(Color.white.opacity(0.15), lineWidth: 1)
-                    )
-            )
-            .padding(.horizontal, 24)
-            .position(
-                x: proxy.size.width / 2,
-                y: showBelow
-                    ? min(adjustedRect.maxY + 24 + 80, screenHeight - 120)
-                    : max(adjustedRect.minY - 24 - 80, 120)
-            )
+            .padding(.top, showBelow ? adjustedRect.maxY + 30 : 0)
+            .padding(.bottom, showBelow ? 0 : screenHeight - adjustedRect.minY + 30)
         }
+    }
+
+    private var tooltipContent: some View {
+        VStack(spacing: 16) {
+            Text(currentStep.title)
+                .font(.system(size: 22, weight: .bold))
+                .foregroundColor(.white)
+
+            Text(currentStep.description)
+                .font(.system(size: 16))
+                .foregroundColor(.white.opacity(0.85))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+
+            // Step dots
+            HStack(spacing: 8) {
+                ForEach(0..<totalSteps, id: \.self) { i in
+                    Circle()
+                        .fill(i == currentIndex ? Color(hex: "#FFD700") : Color.white.opacity(0.4))
+                        .frame(width: 8, height: 8)
+                }
+            }
+            .padding(.top, 4)
+
+            // Buttons
+            HStack(spacing: 16) {
+                Button("Skip") {
+                    AnalyticsService.logEvent("walkthrough_skipped", parameters: ["step": currentStep.title])
+                    dismiss()
+                }
+                .font(.system(size: 15, weight: .medium))
+                .foregroundColor(.white.opacity(0.7))
+
+                Spacer()
+
+                Button {
+                    advance()
+                } label: {
+                    Text(currentIndex < totalSteps - 1 ? "Next" : "Done")
+                        .font(.system(size: 15, weight: .bold))
+                        .foregroundColor(.black)
+                        .padding(.horizontal, 28)
+                        .padding(.vertical, 10)
+                        .background(
+                            LinearGradient(
+                                colors: [Color(hex: "#FFD700"), Color(hex: "#FFED4E")],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .cornerRadius(8)
+                }
+            }
+        }
+        .padding(24)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.black.opacity(0.85))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                )
+        )
+        .padding(.horizontal, 24)
     }
 
     private func advance() {
@@ -212,6 +223,7 @@ struct SpotlightOverlayView: View {
                 }
             }
         } else {
+            AnalyticsService.logEvent("walkthrough_completed")
             dismiss()
         }
 

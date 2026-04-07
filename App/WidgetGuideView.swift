@@ -67,6 +67,7 @@ struct WidgetGuideView: View {
 
                     // Done button
                     Button {
+                        AnalyticsService.logEvent("widget_guide_completed")
                         onDismiss()
                     } label: {
                         Text("Got it!")

@@ -71,34 +71,34 @@ struct DoctorBackedView: View {
                     }
 
                     // Scientific Research
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Scientific research")
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Sources")
                             .font(.system(size: 20, weight: .semibold))
 
                         Text("Our methodology is based on peer-reviewed research from leading dermatological and photobiological journals:")
-                            .font(.system(size: 14))
+                            .font(.system(size: 13))
                             .foregroundColor(.secondary)
 
                         ForEach(Array(papers.enumerated()), id: \.offset) { _, paper in
-                            VStack(alignment: .leading, spacing: 2) {
+                            VStack(alignment: .leading, spacing: 1) {
                                 Link(destination: URL(string: paper.url)!) {
                                     Text(paper.title)
-                                        .font(.system(size: 14, weight: .medium))
+                                        .font(.system(size: 12, weight: .medium))
                                         .foregroundColor(Color(hex: "#FFD700"))
                                         .multilineTextAlignment(.leading)
                                 }
                                 HStack(spacing: 0) {
                                     Text(paper.journal)
-                                        .font(.system(size: 12))
+                                        .font(.system(size: 11))
                                         .foregroundColor(.secondary)
                                     if let year = paper.year {
                                         Text(" (\(year))")
-                                            .font(.system(size: 12))
+                                            .font(.system(size: 11))
                                             .foregroundColor(.secondary)
                                     }
                                 }
                             }
-                            .padding(.bottom, 4)
+                            .padding(.bottom, 2)
                         }
                     }
 

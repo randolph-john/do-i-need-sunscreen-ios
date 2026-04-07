@@ -4,15 +4,17 @@ struct NotificationSettingsView: View {
     @Binding var isPresented: Bool
     @ObservedObject var preferences: UserPreferences
     @ObservedObject var notificationManager: NotificationManager
+    var embedded: Bool
 
     @State private var showSettingsAlert = false
     @State private var notificationTime: Date
     @State private var outdoorStartTime: Date
 
-    init(isPresented: Binding<Bool>, preferences: UserPreferences, notificationManager: NotificationManager) {
+    init(isPresented: Binding<Bool>, preferences: UserPreferences, notificationManager: NotificationManager, embedded: Bool = false) {
         self._isPresented = isPresented
         self.preferences = preferences
         self.notificationManager = notificationManager
+        self.embedded = embedded
 
         var notifComponents = DateComponents()
         notifComponents.hour = preferences.notificationHour
@@ -28,8 +30,25 @@ struct NotificationSettingsView: View {
     }
 
     var body: some View {
-        NavigationView {
-            Form {
+        if embedded {
+            notificationForm
+        } else {
+            NavigationView {
+                notificationForm
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Done") {
+                                isPresented = false
+                            }
+                            .fontWeight(.semibold)
+                        }
+                    }
+            }
+        }
+    }
+
+    private var notificationForm: some View {
+        Form {
                 Section {
                     Toggle("Daily Notifications", isOn: Binding(
                         get: { preferences.notificationsEnabled },
@@ -40,6 +59,7 @@ struct NotificationSettingsView: View {
                                     await MainActor.run {
                                         if granted {
                                             preferences.notificationsEnabled = true
+                                            AnalyticsService.logEvent("notifications_enabled")
                                         } else {
                                             preferences.notificationsEnabled = false
                                             showSettingsAlert = true
@@ -49,6 +69,7 @@ struct NotificationSettingsView: View {
                             } else {
                                 preferences.notificationsEnabled = false
                                 notificationManager.cancelAllNotifications()
+                                AnalyticsService.logEvent("notifications_disabled")
                             }
                         }
                     ))
@@ -84,27 +105,18 @@ struct NotificationSettingsView: View {
                         .padding(.vertical, 4)
                     }
                 }
-            }
-            .navigationTitle("Notifications")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        isPresented = false
-                    }
-                    .fontWeight(.semibold)
+        }
+        .navigationTitle("Notifications")
+        .navigationBarTitleDisplayMode(.inline)
+        .alert("Notifications Disabled", isPresented: $showSettingsAlert) {
+            Button("Open Settings") {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
                 }
             }
-            .alert("Notifications Disabled", isPresented: $showSettingsAlert) {
-                Button("Open Settings") {
-                    if let url = URL(string: UIApplication.openSettingsURLString) {
-                        UIApplication.shared.open(url)
-                    }
-                }
-                Button("Cancel", role: .cancel) {}
-            } message: {
-                Text("Please enable notifications in Settings to receive daily sunscreen reminders.")
-            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Please enable notifications in Settings to receive daily sunscreen reminders.")
         }
     }
 

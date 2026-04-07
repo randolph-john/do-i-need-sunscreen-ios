@@ -161,6 +161,7 @@ struct LocationChangeView: View {
     private func selectLocation(_ result: GeocodedLocation) {
         let elevation: Double? = result.elevation > 0 ? result.elevation : nil
         onLocationSelected(result.location, result.name, elevation, result.timeZone)
+        AnalyticsService.logEvent("location_searched", parameters: ["location_name": result.name])
         isPresented = false
     }
 }
