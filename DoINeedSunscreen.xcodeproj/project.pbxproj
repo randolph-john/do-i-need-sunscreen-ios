@@ -46,6 +46,7 @@
 		BC956FC1066725D6107CAE1D /* WatchLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3369FD5B399BE49BA5F6B5 /* WatchLocationManager.swift */; };
 		BCC28085D51621425B182E73 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DB267A56EC29B7776C756276 /* FirebaseAnalytics */; };
 		BEA07E53624824FB7762C1AC /* ReapplicationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA12D05BB625BF9D64ADAE11 /* ReapplicationInfoView.swift */; };
+		C51A54117E0461EADDF0B8E6 /* SunscreenWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 345C92B9E507A86FE0C89E87 /* SunscreenWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C52AB8DBC13FAD655F446BE7 /* UVGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133D74B9542BD568BC18E17F /* UVGraphView.swift */; };
 		C7F0520A95D91E7CA7E06F02 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECFF203DCC474B85B3071C9 /* AnalyticsService.swift */; };
 		D5F0860D8F7BBF63913EB986 /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CD1CFE565F86656F2E06E /* NotificationSettingsView.swift */; };
@@ -65,6 +66,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 4BD73F9D2B2C89B3B25CF73F;
 			remoteInfo = SunscreenWidgetExtension;
+		};
+		A09352F709160F42A03B8EDB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE2C7F2A080C799A977B852A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 243642134747611550701E53;
+			remoteInfo = SunscreenWatch;
 		};
 		A9AC362629651B5429CC3925 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -96,6 +104,17 @@
 				A3E3A028E94D208ADC942E7C /* SunscreenWatchWidget.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D84853CB0F44122928FFFE20 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				C51A54117E0461EADDF0B8E6 /* SunscreenWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -321,11 +340,13 @@
 				2EC23BC0C688F780575232F8 /* Resources */,
 				B6D7B7DA3BEB83090F2EDF20 /* Frameworks */,
 				3FCE0CC437A2C6E6F6D9F1E9 /* Embed Foundation Extensions */,
+				D84853CB0F44122928FFFE20 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				C3D9A2E184454724AB705F7D /* PBXTargetDependency */,
+				D1E7529374DEF1B976E836CF /* PBXTargetDependency */,
 			);
 			name = DoINeedSunscreen;
 			packageProductDependencies = (
@@ -469,6 +490,11 @@
 			target = 4BD73F9D2B2C89B3B25CF73F /* SunscreenWidgetExtension */;
 			targetProxy = 36A25205BD0D852659BA9DA0 /* PBXContainerItemProxy */;
 		};
+		D1E7529374DEF1B976E836CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 243642134747611550701E53 /* SunscreenWatch */;
+			targetProxy = A09352F709160F42A03B8EDB /* PBXContainerItemProxy */;
+		};
 		D66AFCFF24B75499B6816BCF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3B97E437BA860A2C7CDDE291 /* SunscreenWatchWidget */;
@@ -491,7 +517,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.watch.widget;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -515,7 +541,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.SunscreenWidget;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
@@ -662,7 +688,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.SunscreenWidget;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
@@ -685,7 +711,7 @@
 				INFOPLIST_FILE = Watch/Widget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Sunscreen;
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.sunscreenfyi.DoINeedSunscreen;
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.watch;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -713,7 +739,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -735,7 +761,7 @@
 				INFOPLIST_FILE = Watch/Widget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Sunscreen;
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.sunscreenfyi.DoINeedSunscreen;
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.watch;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -763,7 +789,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -788,7 +814,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunscreenfyi.DoINeedSunscreen.watch.widget;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
